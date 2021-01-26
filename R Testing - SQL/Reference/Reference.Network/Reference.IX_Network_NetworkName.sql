@@ -1,0 +1,1 @@
+﻿create unique nonclustered index IX_Network_NetworkName on Reference.Network (NetworkName, ChannelNumber)

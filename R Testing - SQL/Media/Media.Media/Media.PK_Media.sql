@@ -1,0 +1,1 @@
+﻿alter table Media.Media add constraint PK_Media primary key nonclustered (MediaUid)

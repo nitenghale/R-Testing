@@ -1,0 +1,1 @@
+﻿alter table Media.MediaAttribute add constraint PK_MediaAttribute primary key clustered (MediaAttributeId)

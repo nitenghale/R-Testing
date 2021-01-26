@@ -1,0 +1,1 @@
+﻿alter table Media.Playlist add constraint PK_Playlist primary key clustered (PlaylistId)

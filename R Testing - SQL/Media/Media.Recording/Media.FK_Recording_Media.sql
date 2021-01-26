@@ -1,0 +1,1 @@
+﻿alter table Media.Recording add constraint FK_Recording_Media foreign key (MediaUid) references Media.Media (MediaUid)
