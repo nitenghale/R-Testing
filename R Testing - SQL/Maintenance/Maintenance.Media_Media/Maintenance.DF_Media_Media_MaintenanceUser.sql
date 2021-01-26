@@ -1,0 +1,1 @@
+﻿alter table Maintenance.Media_Media add constraint DF_Media_Media_MaintenanceUser default (system_user) for MaintenanceUser

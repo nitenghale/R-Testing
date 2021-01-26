@@ -76,6 +76,8 @@
     <Folder Include="Reference\Reference.MediaType" />
     <Folder Include="Reference\Reference.Network" />
     <Folder Include="Reference\Reference.StatusCode" />
+    <Folder Include="Maintenance\Maintenance.Media_Media" />
+    <Folder Include="Maintenance\Maintenance.Media_MediaAttribute" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Activity\Activity.sql" />
@@ -189,5 +191,28 @@
     <Build Include="Reference\Reference.MediaAttributeType\Reference.MediaAttributeType_Update.sql" />
     <Build Include="Reference\Reference.MediaAttributeType\Reference.PK_MediaAttributeType.sql" />
     <Build Include="Reference\Reference.MediaAttributeType\Reference.UpdateMediaAttributeType.sql" />
+    <Build Include="Media\Media.Media\Media.AddMedia.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.Media_Media.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.PK_Media_Media.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.DF_Media_Media_MaintenanceDateTime.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.DF_Media_Media_MaintenanceUser.sql" />
+    <Build Include="Media\Media.Media\Media.Media_Insert.sql" />
+    <Build Include="Media\Media.Media\Media.Media_Update.sql" />
+    <Build Include="Media\Media.Media\Media.FK_Media_Media.sql" />
+    <Build Include="Media\Media.Media\Media.Media_Delete.sql" />
+    <Build Include="Media\Media.Media\Media.IX_Media_MediaTitle.sql" />
+    <Build Include="Media\Media.Media\Media.GetMediaUidFromMediaTitle.sql" />
+    <Build Include="Media\Media.Media\Media.BrowseMedia.sql" />
+    <Build Include="Media\Media.Media\Media.ListMedia.sql" />
+    <Build Include="Media\Media.Media\Media.GetMediaDetails.sql" />
+    <Build Include="Media\Media.Media\Media.UpdateMedia.sql" />
+    <Build Include="Media\Media.Media\Media.DeleteMedia.sql" />
+    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.Media_MediaAttribute.sql" />
+    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.PK_Media_MediaAttribute.sql" />
+    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.DF_Media_MediaAttribute_MaintenanceDateTime.sql" />
+    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.DF_Media_MediaAttribute_MaintenanceUser.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="R Testing - SQL.refactorlog" />
   </ItemGroup>
 </Project>

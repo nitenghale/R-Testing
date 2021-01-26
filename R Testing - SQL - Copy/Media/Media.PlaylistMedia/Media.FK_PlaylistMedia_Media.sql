@@ -1,1 +1,0 @@
-﻿alter table Media.PlaylistMedia add constraint FK_PlaylistMedia_Media foreign key (MediaUid) references Media.Media (MediaUid)

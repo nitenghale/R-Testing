@@ -1,6 +1,0 @@
-C:\SQL\R Testing\R Testing - SQL\bin\Debug\R Testing - SQL.dacpac
-C:\SQL\R Testing\R Testing - SQL\obj\Debug\R Testing - SQL.sqlprojAssemblyReference.cache
-C:\SQL\R Testing\R Testing - SQL\obj\Debug\R_Testing___SQL.dll
-C:\SQL\R Testing\R Testing - SQL\obj\Debug\R_Testing___SQL.pdb
-C:\SQL\R Testing\R Testing - SQL\bin\Debug\R_Testing___SQL.dll
-C:\SQL\R Testing\R Testing - SQL\bin\Debug\R_Testing___SQL.pdb

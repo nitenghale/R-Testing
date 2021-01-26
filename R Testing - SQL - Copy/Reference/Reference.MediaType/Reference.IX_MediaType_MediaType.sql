@@ -1,1 +1,0 @@
-﻿create unique nonclustered index IX_MediaType_MediaType on Reference.MediaType (MediaType)

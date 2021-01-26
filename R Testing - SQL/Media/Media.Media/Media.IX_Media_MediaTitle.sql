@@ -1,0 +1,1 @@
+﻿create unique nonclustered index IX_Media_MediaTitle on Media.Media (MediaTitle)

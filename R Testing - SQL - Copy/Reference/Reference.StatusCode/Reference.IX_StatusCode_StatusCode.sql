@@ -1,1 +1,0 @@
-﻿create unique nonclustered index IX_StatusCode_StatusCode on Reference.StatusCode (StatusCode)

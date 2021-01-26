@@ -1,1 +1,0 @@
-﻿alter table Media.Media add constraint DF_Media_LastMaintenanceUser default (system_user) for LastMaintenanceUser

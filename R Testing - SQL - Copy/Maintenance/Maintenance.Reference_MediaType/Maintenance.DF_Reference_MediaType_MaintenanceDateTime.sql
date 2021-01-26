@@ -1,1 +1,0 @@
-﻿alter table Maintenance.Reference_MediaType add constraint DF_Reference_MediaType_MaintenanceDateTime default (getdate()) for MaintenanceDateTime

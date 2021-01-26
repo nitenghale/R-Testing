@@ -1,1 +1,0 @@
-﻿alter table Reference.StatusCode add constraint DF_StatusCode_LastMaintenanceUser default (system_user) for LastMaintenanceUser

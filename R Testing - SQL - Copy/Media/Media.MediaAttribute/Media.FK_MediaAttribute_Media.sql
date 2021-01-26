@@ -1,1 +1,0 @@
-﻿alter table Media.MediaAttribute add constraint FK_MediaAttribute_Media foreign key (MediaUid) references Media.Media (MediaUid)

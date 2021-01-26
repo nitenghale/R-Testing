@@ -1,0 +1,1 @@
+﻿alter table Maintenance.Media_Media add constraint PK_Media_Media primary key clustered (MaintenanceDateTime, MediaUid)
