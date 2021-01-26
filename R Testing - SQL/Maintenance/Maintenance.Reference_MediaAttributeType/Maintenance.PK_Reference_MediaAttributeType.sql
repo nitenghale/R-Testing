@@ -1,0 +1,1 @@
+﻿alter table Maintenance.Reference_MediaAttributeType add constraint PK_Reference_MediaAttributeType primary key clustered (MaintenanceDateTime, MediaAttributeTypeId)

@@ -1,0 +1,1 @@
+﻿alter table Reference.MediaAttributeType add constraint DF_MediaAttributeType_LastMaintenanceUser default (system_user) for LastMaintenanceUser
