@@ -1,0 +1,1 @@
+﻿alter table Maintenance.Reference_Network add constraint DF_Reference_Network_MaintenanceUser default (system_user) for MaintenanceUser

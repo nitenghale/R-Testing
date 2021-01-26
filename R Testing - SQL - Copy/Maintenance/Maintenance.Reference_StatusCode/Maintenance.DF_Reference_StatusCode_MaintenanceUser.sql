@@ -1,0 +1,1 @@
+﻿alter table Maintenance.Reference_StatusCode add constraint DF_Reference_StatusCode_MaintenanceUser default (system_user) for MaintenanceUser

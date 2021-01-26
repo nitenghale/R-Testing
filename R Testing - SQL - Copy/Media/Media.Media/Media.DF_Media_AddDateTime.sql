@@ -1,0 +1,1 @@
+﻿alter table Media.Media add constraint DF_Media_AddDateTime default (getdate()) for AddDateTime

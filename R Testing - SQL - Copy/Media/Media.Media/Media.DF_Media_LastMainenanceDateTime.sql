@@ -1,0 +1,1 @@
+﻿alter table Media.Media add constraint DF_Media_LastMaintenanceDateTime default (getdate()) for LastMaintenanceDateTime

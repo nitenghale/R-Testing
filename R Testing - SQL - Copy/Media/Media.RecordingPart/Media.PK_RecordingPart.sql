@@ -1,0 +1,1 @@
+﻿alter table Media.RecordingPart add constraint PK_RecordingPart primary key clustered (RecordingPartId)

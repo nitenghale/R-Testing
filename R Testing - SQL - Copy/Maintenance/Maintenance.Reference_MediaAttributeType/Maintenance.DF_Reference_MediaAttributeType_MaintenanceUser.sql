@@ -1,0 +1,1 @@
+﻿alter table Maintenance.Reference_MediaAttributeType add constraint DF_Reference_MediaAttributeType_MaintenanceUser default (system_user) for MaintenanceUser

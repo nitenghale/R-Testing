@@ -1,0 +1,1 @@
+﻿alter table Activity.ActivityLog add constraint DF_ActivityLog_ActivityUser default (system_user) for ActivityUser

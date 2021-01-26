@@ -1,0 +1,1 @@
+﻿alter table Media.RecordingPart add constraint FK_RecordingPart_Recording foreign key (RecordingId) references Media.Recording (RecordingId)

@@ -1,0 +1,1 @@
+﻿alter table Activity.ActivityLog add constraint PK_ActivityLog primary key clustered (ActivityDateTime)

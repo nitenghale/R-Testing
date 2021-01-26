@@ -1,0 +1,72 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [Activity] (Schema)
+       [Maintenance] (Schema)
+       [Reference] (Schema)
+       [Activity].[ActivityLog] (Table)
+       [Activity].[ActivityLog].[IX_ActivityLog_ObjectName] (Index)
+       [Maintenance].[Reference_Network] (Table)
+       [Maintenance].[Reference_Network].[IX_Reference_Network_NetworkId] (Index)
+       [Maintenance].[Reference_StatusCode] (Table)
+       [Maintenance].[Reference_MediaType] (Table)
+       [Reference].[Network] (Table)
+       [Reference].[Network].[IX_Network_NetworkName] (Index)
+       [Reference].[StatusCode] (Table)
+       [Reference].[StatusCode].[IX_StatusCode_StatusCode] (Index)
+       [Reference].[MediaType] (Table)
+       [Reference].[MediaType].[IX_MediaType_MediaType] (Index)
+       [Activity].[DF_ActivityLog_ActivityUser] (Default Constraint)
+       [Activity].[DF_ActivityLog_ActivityDateTime] (Default Constraint)
+       [Maintenance].[DF_Reference_Network_MaintenanceUser] (Default Constraint)
+       [Maintenance].[DF_Reference_Network_MaintenanceDateTime] (Default Constraint)
+       [Maintenance].[DF_Reference_StatusCode_MaintenanceUser] (Default Constraint)
+       [Maintenance].[DF_Reference_StatusCode_MaintenanceDateTime] (Default Constraint)
+       [Maintenance].[DF_Reference_MediaType_MaintenanceUser] (Default Constraint)
+       [Maintenance].[DF_Reference_MediaType_MaintenanceDateTime] (Default Constraint)
+       [Reference].[DF_Network_LastMaintenanceUser] (Default Constraint)
+       [Reference].[DF_Network_LastMaintenanceDateTime] (Default Constraint)
+       [Reference].[DF_StatusCode_LastMaintenanceUser] (Default Constraint)
+       [Reference].[DF_StatusCode_LastMaintenanceDateTime] (Default Constraint)
+       [Reference].[DF_MediaType_LastMaintenanceUser] (Default Constraint)
+       [Reference].[DF_MediaType_LastMaintenanceDateTime] (Default Constraint)
+       [Reference].[Network_Update] (Trigger)
+       [Reference].[Network_Insert] (Trigger)
+       [Reference].[Network_Delete] (Trigger)
+       [Reference].[StatusCode_Update] (Trigger)
+       [Reference].[StatusCode_Insert] (Trigger)
+       [Reference].[StatusCode_Delete] (Trigger)
+       [Reference].[MediaType_Update] (Trigger)
+       [Reference].[MediaType_Insert] (Trigger)
+       [Reference].[MediaType_Delete] (Trigger)
+       [Reference].[NetworkIdFromName] (Function)
+       [Reference].[MediaTypeIdFromType] (Function)
+       [Reference].[StatusCodeIdFromCode] (Function)
+       [Activity].[ActivityLogAdd] (Procedure)
+       [Reference].[NetworkAdd] (Procedure)
+       [Reference].[NetworkList] (Procedure)
+       [Reference].[NetworkDetails] (Procedure)
+       [Reference].[NetworkDelete] (Procedure)
+       [Reference].[NetworkBrowse] (Procedure)
+       [Reference].[MediaTypeDelete] (Procedure)
+       [Reference].[MediaTypeAdd] (Procedure)
+       [Reference].[StatusCodeUpdate] (Procedure)
+       [Reference].[StatusCodeDetails] (Procedure)
+       [Reference].[StatusCodeDelete] (Procedure)
+       [Reference].[StatusCodeBrowse] (Procedure)
+       [Reference].[StatusCodeAdd] (Procedure)
+       [Reference].[NetworkUpdate] (Procedure)
+       [Reference].[MediaTypeUpdate] (Procedure)
+       [Reference].[MediaTypeDetails] (Procedure)
+       [Reference].[MediaTypeBrowse] (Procedure)
+
+** Supporting actions

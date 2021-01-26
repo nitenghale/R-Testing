@@ -1,0 +1,29 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [Activity].[DF_ActivityLog_ActivityUser] (Default Constraint)
+       [Maintenance].[DF_Reference_MediaType_MaintenanceUser] (Default Constraint)
+       [Maintenance].[DF_Reference_Network_MaintenanceUser] (Default Constraint)
+       [Maintenance].[DF_Reference_StatusCode_MaintenanceUser] (Default Constraint)
+       [Reference].[DF_MediaType_LastMaintenanceUser] (Default Constraint)
+       [Reference].[DF_Network_LastMaintenanceUser] (Default Constraint)
+       [Reference].[DF_StatusCode_LastMaintenanceUser] (Default Constraint)
+     Create
+       [Activity].[DF_ActivityLog_ActivityUser] (Default Constraint)
+       [Maintenance].[DF_Reference_MediaType_MaintenanceUser] (Default Constraint)
+       [Maintenance].[DF_Reference_Network_MaintenanceUser] (Default Constraint)
+       [Maintenance].[DF_Reference_StatusCode_MaintenanceUser] (Default Constraint)
+       [Reference].[DF_MediaType_LastMaintenanceUser] (Default Constraint)
+       [Reference].[DF_Network_LastMaintenanceUser] (Default Constraint)
+       [Reference].[DF_StatusCode_LastMaintenanceUser] (Default Constraint)
+
+** Supporting actions
