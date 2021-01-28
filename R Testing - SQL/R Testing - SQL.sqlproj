@@ -78,6 +78,12 @@
     <Folder Include="Reference\Reference.StatusCode" />
     <Folder Include="Maintenance\Maintenance.Media_Media" />
     <Folder Include="Maintenance\Maintenance.Media_MediaAttribute" />
+    <Folder Include="Maintenance\Maintenance.Media_Episode" />
+    <Folder Include="Maintenance\Maintenance.Media_Series" />
+    <Folder Include="Maintenance\Maintenance.Media_Movie" />
+    <Folder Include="Media\Media.Episode" />
+    <Folder Include="Media\Media.Series" />
+    <Folder Include="Media\Media.Movie" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Activity\Activity.sql" />
@@ -211,6 +217,17 @@
     <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.PK_Media_MediaAttribute.sql" />
     <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.DF_Media_MediaAttribute_MaintenanceDateTime.sql" />
     <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.DF_Media_MediaAttribute_MaintenanceUser.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Episode\Maintenance.Media_Episode.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Series\Maintenance.Media_Series.sql" />
+    <Build Include="Media\Media.Episode\Media.Episode.sql" />
+    <Build Include="Media\Media.Series\Media.AddSeries.sql" />
+    <Build Include="Media\Media.Series\Media.BrowseSeries.sql" />
+    <Build Include="Media\Media.Series\Media.DeleteSeries.sql" />
+    <Build Include="Media\Media.Series\Media.GetSeriesDetails.sql" />
+    <Build Include="Media\Media.Series\Media.GetSeriesUidFromSeriesTitle.sql" />
+    <Build Include="Media\Media.Series\Media.ListSeries.sql" />
+    <Build Include="Media\Media.Series\Media.Series.sql" />
+    <Build Include="Media\Media.Series\Media.UpdateSeries.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="R Testing - SQL.refactorlog" />

@@ -36,3 +36,134 @@ go
 
 alter table Media.Episode add constraint DF_Episode_LastMaintenanceUser default (system_user) for LastMaintenanceUser
 go
+
+create trigger Media.Episode_Insert
+	on Media.Episode
+	after insert
+as
+begin
+	set nocount on
+
+	insert into Maintenance.Media_Episode
+	(
+		EpisodeUid
+		,MaintenanceType
+		,SeriesUid_After
+		,SeriesTitle_After
+		,SeriesYear_After
+		,SeasonNumber_After
+		,EpisodeNumber_After
+		,EpisodeTitle_After
+		,OriginalAirDate_After
+		,Synopsis_After
+	)
+	select
+		EpisodeUid
+		,'I'
+		,inserted.SeriesUid
+		,Series.SeriesTitle
+		,Series.SeriesYear
+		,SeasonNumber
+		,EpisodeNumber
+		,EpisodeTitle
+		,OriginalAirDate
+		,Synopsis
+	from inserted
+		left join Media.Series
+			on inserted.SeriesUid = Series.SeriesUid
+end
+go
+
+create trigger Media.Episode_Update
+	on Media.Episode
+	after update
+as
+begin
+	set nocount on
+
+	insert into Maintenance.Media_Episode
+	(
+		EpisodeUid
+		,MaintenanceType
+		,SeriesUid_Before
+		,SeriesUid_After
+		,SeriesTitle_Before
+		,SeriesTitle_After
+		,SeriesYear_Before
+		,SeriesYear_After
+		,SeasonNumber_Before
+		,SeasonNumber_After
+		,EpisodeNumber_Before
+		,EpisodeNumber_After
+		,EpisodeTitle_Before
+		,EpisodeTitle_After
+		,OriginalAirDate_Before
+		,OriginalAirDate_After
+		,Synopsis_Before
+		,Synopsis_After
+	)
+	select
+		deleted.EpisodeUid
+		,'U'
+		,deleted.SeriesUid
+		,inserted.SeriesUid
+		,Series_deleted.SeriesTitle
+		,Series_inserted.SeriesTitle
+		,Series_deleted.SeriesYear
+		,Series_inserted.SeriesYear
+		,deleted.SeasonNumber
+		,inserted.SeasonNumber
+		,deleted.EpisodeNumber
+		,inserted.EpisodeNumber
+		,deleted.EpisodeTitle
+		,inserted.EpisodeTitle
+		,deleted.OriginalAirDate
+		,inserted.OriginalAirDate
+		,deleted.Synopsis
+		,inserted.Synopsis
+	from deleted
+		left join Media.Series as Series_deleted
+			on deleted.SeriesUid = Series_deleted.SeriesUid
+		left join inserted
+			on deleted.EpisodeUid = inserted.EpisodeUid
+		left join Media.Series as Series_inserted
+			on inserted.SeriesUid = Series_inserted.SeriesUid
+end
+go
+
+create trigger Media.Episode_Deleted
+	on Media.Episode
+	after delete
+as
+begin
+	set nocount on
+
+	insert into Maintenance.Media_Episode
+	(
+		EpisodeUid
+		,MaintenanceType
+		,SeriesUid_Before
+		,SeriesTitle_Before
+		,SeriesYear_Before
+		,SeasonNumber_Before
+		,EpisodeNumber_Before
+		,EpisodeTitle_Before
+		,OriginalAirDate_Before
+		,Synopsis_Before
+	)
+	select
+		EpisodeUid
+		,'D'
+		,deleted.SeriesUid
+		,Series.SeriesTitle
+		,Series.SeriesYear
+		,SeasonNumber
+		,EpisodeNumber
+		,EpisodeTitle
+		,OriginalAirDate
+		,Synopsis
+	from deleted
+		left join Media.Series
+			on deleted.SeriesUid = Series.SeriesUid
+end
+go
