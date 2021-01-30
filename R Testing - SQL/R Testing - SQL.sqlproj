@@ -84,6 +84,7 @@
     <Folder Include="Media\Media.Episode" />
     <Folder Include="Media\Media.Series" />
     <Folder Include="Media\Media.Movie" />
+    <Folder Include="Maintenance\Maintenance.Media_Playlist" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Activity\Activity.sql" />
@@ -126,7 +127,6 @@
     <Build Include="Media\Media.MediaAttribute\Media.FK_MediaAttribute_MediaAttributeType.sql" />
     <Build Include="Media\Media.MediaAttribute\Media.MediaAttribute.sql" />
     <Build Include="Media\Media.MediaAttribute\Media.PK_MediaAttribute.sql" />
-    <Build Include="Media\Media.Playlist\Media.PK_Playlist.sql" />
     <Build Include="Media\Media.Playlist\Media.Playlist.sql" />
     <Build Include="Media\Media.PlaylistMedia\Media.FK_PlaylistMedia_Media.sql" />
     <Build Include="Media\Media.PlaylistMedia\Media.FK_PlaylistMedia_Playlist.sql" />
@@ -228,6 +228,28 @@
     <Build Include="Media\Media.Series\Media.ListSeries.sql" />
     <Build Include="Media\Media.Series\Media.Series.sql" />
     <Build Include="Media\Media.Series\Media.UpdateSeries.sql" />
+    <Build Include="Media\Media.Episode\Media.AddEpisode.sql" />
+    <Build Include="Media\Media.Episode\Media.BrowseEpisodes.sql" />
+    <Build Include="Media\Media.Episode\Media.GetEpisodeDetails.sql" />
+    <Build Include="Media\Media.Episode\Media.GetEpisodeUidFromSeriesSeasonAndEpisode.sql" />
+    <Build Include="Media\Media.Episode\Media.UpdateEpisode.sql" />
+    <Build Include="Media\Media.Episode\Media.DeleteEpisode.sql" />
+    <Build Include="Media\Media.Movie\Media.Movie.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Movie\Maintenance.Media_Movie.sql" />
+    <Build Include="Media\Media.Movie\Media.GetMovieUidFromMovieTitleAndReleaseDate.sql" />
+    <Build Include="Media\Media.Movie\Media.AddMovie.sql" />
+    <Build Include="Media\Media.Movie\Media.BrowseMovies.sql" />
+    <Build Include="Media\Media.Movie\Media.GetMovieDetails.sql" />
+    <Build Include="Media\Media.Movie\Media.UpdateMovie.sql" />
+    <Build Include="Media\Media.Movie\Media.DeleteMovie.sql" />
+    <Build Include="Maintenance\Maintenance.Media_Playlist\Maintenance.Media_Playlist.sql" />
+    <Build Include="Media\Media.Playlist\Media.GetPlaylistIdFromPlaylistName.sql" />
+    <Build Include="Media\Media.Playlist\Media.AddPlaylist.sql" />
+    <Build Include="Media\Media.Playlist\Media.BrowsePlaylists.sql" />
+    <Build Include="Media\Media.Playlist\Media.ListPlaylists.sql" />
+    <Build Include="Media\Media.Playlist\Media.GetPlaylistDetails.sql" />
+    <Build Include="Media\Media.Playlist\Media.UpdatePlaylist.sql" />
+    <Build Include="Media\Media.Playlist\Media.DeletePlaylist.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="R Testing - SQL.refactorlog" />

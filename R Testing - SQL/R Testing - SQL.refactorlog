@@ -7,4 +7,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="MediaTitle" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="694a758c-3958-4c39-934d-644df94a8877" ChangeDateTime="01/29/2021 11:54:58">
+    <Property Name="ElementName" Value="[Media].[PlaylistMedia].[MediaUid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Media].[PlaylistMedia]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MediaReferenceUid" />
+  </Operation>
 </Operations>
