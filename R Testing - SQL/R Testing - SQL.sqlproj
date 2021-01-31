@@ -66,8 +66,6 @@
     <Folder Include="Maintenance\Maintenance.Reference_MediaType" />
     <Folder Include="Maintenance\Maintenance.Reference_Network" />
     <Folder Include="Maintenance\Maintenance.Reference_StatusCode" />
-    <Folder Include="Media\Media.Media" />
-    <Folder Include="Media\Media.MediaAttribute" />
     <Folder Include="Media\Media.Playlist" />
     <Folder Include="Media\Media.PlaylistMedia" />
     <Folder Include="Media\Media.Recording" />
@@ -76,8 +74,6 @@
     <Folder Include="Reference\Reference.MediaType" />
     <Folder Include="Reference\Reference.Network" />
     <Folder Include="Reference\Reference.StatusCode" />
-    <Folder Include="Maintenance\Maintenance.Media_Media" />
-    <Folder Include="Maintenance\Maintenance.Media_MediaAttribute" />
     <Folder Include="Maintenance\Maintenance.Media_Episode" />
     <Folder Include="Maintenance\Maintenance.Media_Series" />
     <Folder Include="Maintenance\Maintenance.Media_Movie" />
@@ -85,6 +81,7 @@
     <Folder Include="Media\Media.Series" />
     <Folder Include="Media\Media.Movie" />
     <Folder Include="Maintenance\Maintenance.Media_Playlist" />
+    <Folder Include="Maintenance\Maintenance.Media_PlaylistMedia" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Activity\Activity.sql" />
@@ -114,26 +111,9 @@
     <Build Include="Maintenance\Maintenance.Reference_Network\Maintenance.IX_Reference_Network_NetworkId.sql" />
     <Build Include="Maintenance\Maintenance.Reference_Network\Maintenance.PK_Reference_Network.sql" />
     <Build Include="Maintenance\Maintenance.Reference_Network\Maintenance.Reference_Network.sql" />
-    <Build Include="Media\Media.Media\Media.DF_Media_AddDateTime.sql" />
-    <Build Include="Media\Media.Media\Media.DF_Media_LastMainenanceDateTime.sql" />
-    <Build Include="Media\Media.Media\Media.DF_Media_LastMaintenanceUser.sql" />
-    <Build Include="Media\Media.Media\Media.DF_Media_MediaUid.sql" />
-    <Build Include="Media\Media.Media\Media.FK_Media_MediaType.sql" />
-    <Build Include="Media\Media.Media\Media.FK_Media_Network.sql" />
-    <Build Include="Media\Media.Media\Media.IX_Media_AddDateTime.sql" />
-    <Build Include="Media\Media.Media\Media.Media.sql" />
-    <Build Include="Media\Media.Media\Media.PK_Media.sql" />
-    <Build Include="Media\Media.MediaAttribute\Media.FK_MediaAttribute_Media.sql" />
-    <Build Include="Media\Media.MediaAttribute\Media.FK_MediaAttribute_MediaAttributeType.sql" />
-    <Build Include="Media\Media.MediaAttribute\Media.MediaAttribute.sql" />
-    <Build Include="Media\Media.MediaAttribute\Media.PK_MediaAttribute.sql" />
     <Build Include="Media\Media.Playlist\Media.Playlist.sql" />
-    <Build Include="Media\Media.PlaylistMedia\Media.FK_PlaylistMedia_Media.sql" />
-    <Build Include="Media\Media.PlaylistMedia\Media.FK_PlaylistMedia_Playlist.sql" />
-    <Build Include="Media\Media.PlaylistMedia\Media.PK_PlaylistMedia.sql" />
     <Build Include="Media\Media.PlaylistMedia\Media.PlaylistMedia.sql" />
     <Build Include="Media\Media.PlaylistMedia\Media.PlaylistMediaGetNextPlaylistSequence.sql" />
-    <Build Include="Media\Media.Recording\Media.FK_Recording_Media.sql" />
     <Build Include="Media\Media.Recording\Media.FK_Recording_StatusCode.sql" />
     <Build Include="Media\Media.Recording\Media.PK_Recording.sql" />
     <Build Include="Media\Media.Recording\Media.Recording.sql" />
@@ -197,26 +177,6 @@
     <Build Include="Reference\Reference.MediaAttributeType\Reference.MediaAttributeType_Update.sql" />
     <Build Include="Reference\Reference.MediaAttributeType\Reference.PK_MediaAttributeType.sql" />
     <Build Include="Reference\Reference.MediaAttributeType\Reference.UpdateMediaAttributeType.sql" />
-    <Build Include="Media\Media.Media\Media.AddMedia.sql" />
-    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.Media_Media.sql" />
-    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.PK_Media_Media.sql" />
-    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.DF_Media_Media_MaintenanceDateTime.sql" />
-    <Build Include="Maintenance\Maintenance.Media_Media\Maintenance.DF_Media_Media_MaintenanceUser.sql" />
-    <Build Include="Media\Media.Media\Media.Media_Insert.sql" />
-    <Build Include="Media\Media.Media\Media.Media_Update.sql" />
-    <Build Include="Media\Media.Media\Media.FK_Media_Media.sql" />
-    <Build Include="Media\Media.Media\Media.Media_Delete.sql" />
-    <Build Include="Media\Media.Media\Media.IX_Media_MediaTitle.sql" />
-    <Build Include="Media\Media.Media\Media.GetMediaUidFromMediaTitle.sql" />
-    <Build Include="Media\Media.Media\Media.BrowseMedia.sql" />
-    <Build Include="Media\Media.Media\Media.ListMedia.sql" />
-    <Build Include="Media\Media.Media\Media.GetMediaDetails.sql" />
-    <Build Include="Media\Media.Media\Media.UpdateMedia.sql" />
-    <Build Include="Media\Media.Media\Media.DeleteMedia.sql" />
-    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.Media_MediaAttribute.sql" />
-    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.PK_Media_MediaAttribute.sql" />
-    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.DF_Media_MediaAttribute_MaintenanceDateTime.sql" />
-    <Build Include="Maintenance\Maintenance.Media_MediaAttribute\Maintenance.DF_Media_MediaAttribute_MaintenanceUser.sql" />
     <Build Include="Maintenance\Maintenance.Media_Episode\Maintenance.Media_Episode.sql" />
     <Build Include="Maintenance\Maintenance.Media_Series\Maintenance.Media_Series.sql" />
     <Build Include="Media\Media.Episode\Media.Episode.sql" />
@@ -224,7 +184,7 @@
     <Build Include="Media\Media.Series\Media.BrowseSeries.sql" />
     <Build Include="Media\Media.Series\Media.DeleteSeries.sql" />
     <Build Include="Media\Media.Series\Media.GetSeriesDetails.sql" />
-    <Build Include="Media\Media.Series\Media.GetSeriesUidFromSeriesTitle.sql" />
+    <Build Include="Media\Media.Series\Media.GetSeriesUidFromSeriesTitleAndYear.sql" />
     <Build Include="Media\Media.Series\Media.ListSeries.sql" />
     <Build Include="Media\Media.Series\Media.Series.sql" />
     <Build Include="Media\Media.Series\Media.UpdateSeries.sql" />
@@ -250,6 +210,14 @@
     <Build Include="Media\Media.Playlist\Media.GetPlaylistDetails.sql" />
     <Build Include="Media\Media.Playlist\Media.UpdatePlaylist.sql" />
     <Build Include="Media\Media.Playlist\Media.DeletePlaylist.sql" />
+    <Build Include="Maintenance\Maintenance.Media_PlaylistMedia\Maintenance.Media_PlaylistMedia.sql" />
+    <Build Include="Media\Media.PlaylistMedia\Media.AddPlaylistMedia.sql" />
+    <Build Include="Media\Media.Episode\Media.GetEpisodeUidFromEpisodeTitle.sql" />
+    <Build Include="Media\Media.Series\Media.GetSeriesUidFromSeriesTitle.sql" />
+    <Build Include="Media\Media.Movie\Media.GetMovieUidFromMovieTitle.sql" />
+    <Build Include="Media\Media.PlaylistMedia\Media.BrowsePlaylistMedia.sql" />
+    <Build Include="Media\Media.PlaylistMedia\Media.GetPlaylistMediaIdFromPlaylistIdAndSequence.sql" />
+    <Build Include="Media\Media.PlaylistMedia\Media.DeletePlaylistMedia.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="R Testing - SQL.refactorlog" />

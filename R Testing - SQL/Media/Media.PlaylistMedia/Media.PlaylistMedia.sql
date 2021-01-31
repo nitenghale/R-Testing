@@ -13,6 +13,9 @@ go
 alter table Media.PlaylistMedia add constraint PK_PlaylistMedia primary key clustered (PlaylistMediaId)
 go
 
+create unique nonclustered index IX_PlaylistMedia_PlaylistId_PlaylistSequence on Media.PlaylistMedia (PlaylistId, PlaylistSequence)
+go
+
 alter table Media.PlaylistMedia add constraint FK_PlaylistMedia_Playlist foreign key (PlaylistId) references Media.Playlist (PlaylistId)
 go
 
@@ -157,17 +160,17 @@ begin
 		,inserted.PlaylistSequence
 	from deleted
 		left join Media.Playlist as Playlist_deleted
-			on inserted.PlaylistId = Playlist_deleted.PlaylistId
+			on deleted.PlaylistId = Playlist_deleted.PlaylistId
 		left join Reference.MediaType as MediaType_deleted
-			on inserted.MediaTypeId = MediaType_deleted.MediaTypeId
+			on deleted.MediaTypeId = MediaType_deleted.MediaTypeId
 		left join Media.Episode as Episode_deleted
-			on inserted.MediaReferenceUid = Episode_deleted.EpisodeUid
+			on deleted.MediaReferenceUid = Episode_deleted.EpisodeUid
 		left join Media.Series as Series_Episode_deleted
 			on Episode_deleted.SeriesUid = Series_Episode_deleted.SeriesUid
 		left join Media.Series as Series_deleted
-			on inserted.MediaReferenceUid = Series_deleted.SeriesUid
+			on deleted.MediaReferenceUid = Series_deleted.SeriesUid
 		left join Media.Movie as Movie_deleted
-			on inserted.MediaReferenceUid = Movie_deleted.MovieUid
+			on deleted.MediaReferenceUid = Movie_deleted.MovieUid
 		left join inserted
 			on deleted.PlaylistMediaId = inserted.PlaylistMediaId
 		left join Media.Playlist as Playlist_inserted

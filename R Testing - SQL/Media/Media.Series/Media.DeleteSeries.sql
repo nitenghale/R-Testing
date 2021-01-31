@@ -6,7 +6,7 @@ begin
 
 	declare @objectName varchar(150) = object_schema_name(@@procid) + '.' + object_name(@@procid)
 	declare @objectParameters nvarchar(max) = 
-		'@seriesUid = ||' + isnull(@seriesUid, 'NULL') + '||'
+		'@seriesUid = ||' + isnull(cast(@seriesUid as varchar(50)), 'NULL') + '||'
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = @objectParameters
 
 	delete from Media.Series

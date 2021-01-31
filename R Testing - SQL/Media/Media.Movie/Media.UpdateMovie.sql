@@ -11,7 +11,7 @@ begin
 
 	declare @objectName varchar(150) = object_schema_name(@@procid) + '.' + object_name(@@procid)
 	declare @objectParameters nvarchar(max) = 
-		',@movieUid = ||' + isnull(@movieUid, 'NULL') + '||' +
+		',@movieUid = ||' + isnull(cast(@movieUid as varchar(50)), 'NULL') + '||' +
 		', @movieTitle = ||' + isnull(@movieTitle, 'NULL') + '||' +
 		', @releaseDate = ||' + isnull(cast(@releaseDate as varchar(10)), 'NULL') + '||' +
 		', @networkId = ||' + isnull(cast(@networkId as varchar(5)), 'NULL') + '||' +

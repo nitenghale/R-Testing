@@ -1,14 +1,14 @@
-﻿create procedure Media.DeleteMovie
-	@movieUid uniqueidentifier
+﻿create procedure Media.DeletePlaylistMedia
+	@playlistId smallint = null
 as
 begin
 	set nocount on
 
 	declare @objectName varchar(150) = object_schema_name(@@procid) + '.' + object_name(@@procid)
 	declare @objectParameters nvarchar(max) = 
-		',@movieUid = ||' + isnull(cast(@movieUid as varchar(50)), 'NULL') + '||'
+		'@playlistId = ||' + isnull(cast(@playlistId as varchar(5)), 'NULL') + '||'
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = @objectParameters
 
-	delete from Media.Movie
-	where MovieUid = @movieUid
+	delete from Media.PlaylistMedia
+	where PlaylistId = @playlistId
 end

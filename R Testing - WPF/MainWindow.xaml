@@ -1,12 +1,38 @@
-﻿<Window x:Class="R_Testing___WPF.MainWindow"
+﻿<RibbonWindow x:Class="R_Testing___WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:R_Testing___WPF"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
-</Window>
+        mc:Ignorable="d" Name="mainWindow"
+        Title="R Testing" Height="800" Width="1000" Background="LightGray" WindowStartupLocation="CenterScreen">
+    <DockPanel Name="dpMainWindow">
+        <Ribbon Name="rMainRibbon" DockPanel.Dock="Top">
+            <RibbonTab Name="rtLibrary" Header="Library">
+                <RibbonGroup Name="rgLibraryMovies" Header="Movies">
+                    <RibbonButton Name="rbLibraryMoviesAdd" SmallImageSource="images/FilmAdd_16.png" Label="Add Movie" Click="LibraryMoviesAdd_Click"/>
+                    <RibbonButton Name="rbLibraryMoviesBrowse" SmallImageSource="images/FilmBrowse_16.png" Label="Browse Movies" Click="LibraryMoviesBrowse_Click"/>
+                </RibbonGroup>
+                <RibbonGroup Name="rgLibraryTvShows" Header="TV Shows">
+                    <RibbonButton Name="rbLibraryTvShowsAdd" SmallImageSource="images/TvShowAdd_16.png" Label="Add TV Show" Click="LibraryTvShowsAdd_Click"/>
+                    <RibbonButton Name="rbLibraryTvShowsBrowse" SmallImageSource="images/TvShowBrowse_16.png" Label="Browse TV Shows" Click="LibraryTvShowsBrowse_Click"/>
+                </RibbonGroup>
+                <RibbonGroup Name="rgLibraryPlaylists" Header="Playlists">
+                    <RibbonButton Name="rbLibraryPlaylistAdd" SmallImageSource="images/PlaylistAdd_16.png" Label="Add Playlist" Click="LibraryPlaylistAdd_Click"/>
+                    <RibbonButton Name="rbLibraryPlaylistBrowse" SmallImageSource="images/PlaylistBrowse_16.png" Label="Browse Playlists" Click="LibraryPlaylistBrowse_Click"/>
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Name="rtReference" Header="Reference">
+                <RibbonGroup Name="rgReferenceNetwork" Header="Network">
+                    <RibbonButton Name="rbReferenceNetworkAdd" SmallImageSource="images/Network_16.png" Label="Add Network" Click="ReferenceNetworkAdd_Click"/>
+                    <RibbonButton Name="rbReferenceNetworkBrowse" SmallImageSource="images/Network_16.png" Label="Browse Networks" Click="ReferenceNetworkBrowse_Click"/>
+                </RibbonGroup>
+                <RibbonGroup Name="rgReferenceMediaType" Header="Media Type">
+                    <RibbonButton Name="rbReferenceMediaTypeAdd" SmallImageSource="images/MediaType_16.png" Label="Add Media Type" Click="ReferenceMediaTypeAdd_Click"/>
+                    <RibbonButton Name="rbReferenceMediaTypeBrowse" SmallImageSource="images/MediaType_16.png" Label="Browse Media Types" Click="ReferenceMediaTypeBrowse_Click"/>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <ContentControl Name="ccMainWindow"/>
+    </DockPanel>
+</RibbonWindow>

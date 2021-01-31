@@ -1,15 +1,10 @@
-﻿create function Media.PlaylistMediaGetNextPlaylistSequence (@playlistId smallint, @mediaUid uniqueidentifier)
+﻿create function Media.PlaylistMediaGetNextPlaylistSequence (@playlistId smallint)
 	returns smallint
 as
 begin
 	declare @playlistSequence smallint
 
-	set @playlistSequence = (
-		select max(PlaylistSequence) 
-		from Media.PlaylistMedia
-		where
-			PlaylistId = @playlistId
-			and MediaUid = @mediaUid) + 1
+	set @playlistSequence = (select max(PlaylistSequence) from Media.PlaylistMedia where PlaylistId = @playlistId) + 1
 
 	return @playlistSequence
 end

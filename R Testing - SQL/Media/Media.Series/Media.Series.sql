@@ -133,7 +133,7 @@ begin
 		,'I'
 		,SeriesTitle
 		,SeriesYear
-		,inserted.NetworkId
+		,deleted.NetworkId
 		,NetworkName
 		,SeriesDescription
 	from deleted

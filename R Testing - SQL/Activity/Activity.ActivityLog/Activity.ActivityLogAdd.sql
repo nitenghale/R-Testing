@@ -7,12 +7,14 @@ begin
 
 	insert into Activity.ActivityLog
 	(
-		ObjectName
+		ActivitySequence
+		,ObjectName
 		,ObjectParameters
 	)
 	values
 	(
-		@objectName
+		Activity.GetNextActivitySequence()
+		,@objectName
 		,@objectParameters
 	)
 end

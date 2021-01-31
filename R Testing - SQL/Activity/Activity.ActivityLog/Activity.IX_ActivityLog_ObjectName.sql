@@ -1,1 +1,0 @@
-﻿create nonclustered index IX_ActivityLog_ObjectName on Activity.ActivityLog (ObjectName, ActivityDateTime)

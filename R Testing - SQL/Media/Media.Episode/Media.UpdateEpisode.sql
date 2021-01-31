@@ -14,8 +14,8 @@ begin
 
 	declare @objectName varchar(150) = object_schema_name(@@procid) + '.' + object_name(@@procid)
 	declare @objectParameters nvarchar(max) = 
-		'@episodeUid = ||' + isnull(@episodeUid, 'NULL') + '||' +
-		', @seriesUid = ||' + isnull(@seriesUid, 'NULL') + '||' +
+		'@episodeUid = ||' + isnull(cast(@episodeUid as varchar(50)), 'NULL') + '||' +
+		', @seriesUid = ||' + isnull(cast(@seriesUid as varchar(50)), 'NULL') + '||' +
 		', @seriesTitle = ||' + isnull(@seriesTitle, 'NULL') + '||' +
 		', @seriesYear = ||' + isnull(cast(@seriesYear as varchar(5)), 'NULL') + '||' +
 		', @seasonNumber = ||' + isnull(cast(@seasonNumber as varchar(4)), 'NULL') + '||' +
@@ -26,7 +26,7 @@ begin
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = @objectParameters
 
 	if @seriesUid is null and @seriesTitle is not null and @seriesYear is not null
-		set @seriesUid = Media.GetSeriesUidFromSeriesTitle(@seriesTitle, @seriesYear)
+		set @seriesUid = Media.GetSeriesUidFromSeriesTitleAndYear(@seriesTitle, @seriesYear)
 
 
 	update Media.Episode

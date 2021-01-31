@@ -7,15 +7,15 @@ begin
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = null
 
 	select
-		MovieUid
-		,MovieTitle
+		--MovieUid
+		MovieTitle
 		,ReleaseDate
 		--,Movie.NetworkId
 		,Network.NetworkAbbreviation
 		,Network.NetworkName
 		,Network.ChannelNumber
 		,Synopsis
-		,AddDateTime
+		--,AddDateTime
 		,Movie.LastMaintenanceDateTime
 		,Movie.LastMaintenanceUser
 	from Media.Movie

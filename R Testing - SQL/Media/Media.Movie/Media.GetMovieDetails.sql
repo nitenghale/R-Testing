@@ -8,13 +8,13 @@ begin
 
 	declare @objectName varchar(150) = object_schema_name(@@procid) + '.' + object_name(@@procid)
 	declare @objectParameters nvarchar(max) = 
-		',@movieUid = ||' + isnull(@movieUid, 'NULL') + '||' +
+		',@movieUid = ||' + isnull(cast(@movieUid as varchar(50)), 'NULL') + '||' +
 		', @movieTitle = ||' + isnull(@movieTitle, 'NULL') + '||' +
 		', @releaseDate = ||' + isnull(cast(@releaseDate as varchar(10)), 'NULL') + '||'
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = @objectParameters
 
 	if @movieUid is null and @movieTitle is not null and @releaseDate is not null
-		set @movieUid = Media.GetMovieUidFromMovieTitleAndReleaseDate
+		set @movieUid = Media.GetMovieUidFromMovieTitleAndReleaseDate(@movieTitle, @releaseDate)
 
 	select
 		MovieUid
