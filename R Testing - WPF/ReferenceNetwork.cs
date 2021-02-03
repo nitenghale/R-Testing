@@ -120,14 +120,14 @@ namespace R_Testing___WPF
                 SqlParameter parmNetworkId = new SqlParameter("@networkId", SqlDbType.TinyInt);
                 parmNetworkId.Value = networkId;
                 dbConnection.sqlCommand.Parameters.Add(parmNetworkId);
-                dbConnection.sqlString = dbConnection.sqlString + "@networkId = @networkId";
+                dbConnection.sqlString += "@networkId = @networkId";
             }
             else
             {
                 SqlParameter parmNetworkName = new SqlParameter("@networkName", SqlDbType.NVarChar, 50);
                 parmNetworkName.Value = networkName;
                 dbConnection.sqlCommand.Parameters.Add(parmNetworkName);
-                dbConnection.sqlString = dbConnection.sqlString + "@networkName = @networkName";
+                dbConnection.sqlString += "@networkName = @networkName";
             }
 
             dbConnection.ReadTable();
@@ -160,9 +160,6 @@ namespace R_Testing___WPF
 
             // Last Maintenance User - 5 nvarchar(50)
             lastMaintenanceUser = String.Format("{5}", record[0], record[1], record[2], record[3], record[4], record[5]);
-
-            returnCode = 0;
-            errorMessage = "";
 
             dbConnection.CloseReader();
             dbConnection.CloseConnection();

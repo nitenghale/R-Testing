@@ -41,7 +41,6 @@ namespace R_Testing___WPF
             {
                 tbMessage.Text = network.errorMessage;
                 tbStatusBar.Text = network.errorMessage;
-                MessageBox.Show(network.errorMessage, "Error retrieving network");
                 SetErrorFormat();
                 return;
             }

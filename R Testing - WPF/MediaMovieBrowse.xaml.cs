@@ -67,7 +67,7 @@ namespace R_Testing___WPF
             ContentPresenter contentPresenter = VisualTreeHelper.GetParent(ucMediaMovieBrowse) as ContentPresenter;
             ContentControl contentControl = VisualTreeHelper.GetParent(contentPresenter) as ContentControl;
             parentWindow.Title = "Movie Maintenance: " + movieTitle;
-            //contentControl.Content = new ReferenceNetworkMaintenance(networkName);
+            contentControl.Content = new MediaMovieMaintenance(movieTitle);
         }
     }
 }

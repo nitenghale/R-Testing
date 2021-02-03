@@ -90,10 +90,6 @@
     <Build Include="Reference\Reference.sql" />
     <Build Include="Activity\Activity.ActivityLog\Activity.ActivityLog.sql" />
     <Build Include="Activity\Activity.ActivityLog\Activity.ActivityLogAdd.sql" />
-    <Build Include="Activity\Activity.ActivityLog\Activity.DF_ActivityLog_ActivityDateTime.sql" />
-    <Build Include="Activity\Activity.ActivityLog\Activity.DF_ActivityLog_ActivityUser.sql" />
-    <Build Include="Activity\Activity.ActivityLog\Activity.IX_ActivityLog_ObjectName.sql" />
-    <Build Include="Activity\Activity.ActivityLog\Activity.PK_ActivityLog.sql" />
     <Build Include="Maintenance\Maintenance.Reference_MediaAttributeType\Maintenance.DF_Reference_MediaAttributeType_MaintenanceDateTime.sql" />
     <Build Include="Maintenance\Maintenance.Reference_MediaAttributeType\Maintenance.DF_Reference_MediaAttributeType_MaintenanceUser.sql" />
     <Build Include="Maintenance\Maintenance.Reference_MediaAttributeType\Maintenance.PK_Reference_MediaAttributeType.sql" />

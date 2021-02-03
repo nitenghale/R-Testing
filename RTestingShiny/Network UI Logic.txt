@@ -1,0 +1,19 @@
+                    fluidPage(
+                        h1("Networks"),
+                        p(textOutput("testText")),
+                        fluidRow(
+                            column(2, numericInput("referenceNetworkId", "ID", min = 1, max = 32767, value = 1, step = 1)),
+                            column(4, textInput("referenceNetworkName", "Name")),
+                            column(2, textInput("referenceNetworkAbbreviation", "Abbr")),
+                            column(2, numericInput("referenceNetworkChannel", "Channel", min = 0, max = 99999.99, value = 0, step = .1))
+                        ),
+                        fluidRow(
+                            column(2, actionButton("referenceNetworkAdd", "Add"))
+                        ),
+                        fluidRow(
+                            column(2, textOutput("outReferenceNetworkId")),
+                            column(4, textOutput("outReferenceNetworkName")),
+                            column(2, textOutput("outReferenceNetworkAbbreviation")),
+                            column(2, textOutput("outReferenceNetworkChannel"))
+                        )
+                    )

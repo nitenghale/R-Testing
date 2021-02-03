@@ -16,6 +16,9 @@ begin
 	if @movieUid is null and @movieTitle is not null and @releaseDate is not null
 		set @movieUid = Media.GetMovieUidFromMovieTitleAndReleaseDate(@movieTitle, @releaseDate)
 
+	if @movieUid is null and @movieTitle is not null
+		set @movieUid = Media.GetMovieUidFromMovieTitle(@movieTitle)
+
 	select
 		MovieUid
 		,MovieTitle
@@ -24,6 +27,7 @@ begin
 		,Network.NetworkAbbreviation
 		,Network.NetworkName
 		,Network.ChannelNumber
+		,Synopsis
 		,Movie.AddDateTime
 		,Movie.LastMaintenanceDateTime
 		,Movie.LastMaintenanceUser
