@@ -11,13 +11,13 @@ begin
 		MovieTitle
 		,ReleaseDate
 		--,Movie.NetworkId
-		,Network.NetworkAbbreviation
+		--,Network.NetworkAbbreviation
 		,Network.NetworkName
-		,Network.ChannelNumber
+		--,Network.ChannelNumber
 		,Synopsis
 		--,AddDateTime
-		,Movie.LastMaintenanceDateTime
-		,Movie.LastMaintenanceUser
+		--,Movie.LastMaintenanceDateTime
+		--,Movie.LastMaintenanceUser
 	from Media.Movie
 		left join Reference.Network
 			on Movie.NetworkId = Network.NetworkId

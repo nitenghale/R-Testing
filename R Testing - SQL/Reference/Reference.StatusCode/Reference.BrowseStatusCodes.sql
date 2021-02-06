@@ -7,8 +7,8 @@ begin
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = null
 
 	select
-		StatusCodeId
-		,StatusCode
+		--StatusCodeId
+		StatusCode
 		,StatusDescription
 		,LastMaintenanceDateTime
 		,LastMaintenanceUser

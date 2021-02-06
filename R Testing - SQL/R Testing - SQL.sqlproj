@@ -214,6 +214,7 @@
     <Build Include="Media\Media.PlaylistMedia\Media.BrowsePlaylistMedia.sql" />
     <Build Include="Media\Media.PlaylistMedia\Media.GetPlaylistMediaIdFromPlaylistIdAndSequence.sql" />
     <Build Include="Media\Media.PlaylistMedia\Media.DeletePlaylistMedia.sql" />
+    <Build Include="Activity\Activity.ActivityLog\Activity.GetNextActivitySequence.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="R Testing - SQL.refactorlog" />
