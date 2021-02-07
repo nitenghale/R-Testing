@@ -7,15 +7,15 @@ begin
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = null
 
 	select
-		SeriesUid
-		,SeriesTitle
+		--SeriesUid
+		SeriesTitle
 		,SeriesYear
 		--,Series.NetworkId
 		,NetworkName
 		,SeriesDescription
-		,AddDateTime
-		,Series.LastMaintenanceDateTime
-		,Series.LastMaintenanceUser
+		--,AddDateTime
+		--,Series.LastMaintenanceDateTime
+		--,Series.LastMaintenanceUser
 	from Media.Series
 		inner join Reference.Network
 			on Series.NetworkId = Network.NetworkId

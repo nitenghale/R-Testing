@@ -43,9 +43,9 @@ shinyUI(
         tabItem(tabName = "referenceStatusMenu", 
           referenceStatusCodeModuleUI("referenceStatusCodeModule", "Status Code Module")),
         tabItem(tabName = "mediaMovieMenu",
-          mediaMovieModuleUI("mediaMovieModule", "Movie Module"))
-        ##tabItem(tabName = "mediaSeriesMenu", 
-          ##seriesModuleUI("seriesModule", "Series Module")),
+          mediaMovieModuleUI("mediaMovieModule", "Movie Module")),
+        tabItem(tabName = "mediaSeriesMenu", 
+          mediaSeriesModuleUI("mediaSeriesModule", "Series Module"))
         ##tabItem(tabName = "mediaPlaylistMenu", 
           ##playlistModuleUI("playlistModule", "Playlist Module")),
         ##tabItem(tabName = "mediaRecordingsMenu", 

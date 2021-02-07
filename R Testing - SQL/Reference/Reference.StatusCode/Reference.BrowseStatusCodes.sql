@@ -10,8 +10,8 @@ begin
 		--StatusCodeId
 		StatusCode
 		,StatusDescription
-		,LastMaintenanceDateTime
-		,LastMaintenanceUser
+		--,LastMaintenanceDateTime
+		--,LastMaintenanceUser
 	from Reference.StatusCode
 	order by StatusCode
 end

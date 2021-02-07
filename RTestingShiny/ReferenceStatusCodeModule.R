@@ -10,8 +10,8 @@ referenceStatusCodeModuleUI <- function(id, label = "Status Code Module") {
     fluidPage(
       h1("Status Codes"),
       fluidRow(
-        column(4, textInput(ns("referenceStatusCode"), "Code")),
-        column(2, textInput(ns("referenceStatusDescription"), "Desc"))
+        column(2, uiOutput(ns("outReferenceStatusCode"))),
+        column(4, uiOutput(ns("outReferenceStatusDescription")))
       ),
       fluidRow(
         column(2, actionButton(ns("referenceStatusCodeAdd"), "Add"))
@@ -31,6 +31,18 @@ referenceStatusCodeModuleServer <- function(id, stringsAsFactors) {
     id,
     ## Below is the module function
     function(input, output, session) {
+      
+      ns <- session$ns
+      
+      output$outReferenceStatusCode <- 
+        renderUI(CreateReferenceStatusCodeTextbox(ns))
+      
+      output$outReferenceStatusDescription <-
+        renderUI(CreateReferenceStatusDescriptionTextbox(ns))
+      
+      output$outReferenceStatusCodeBrowse <-
+        DT::renderDataTable(GetStatusCodes())
+      
       observeEvent(input$referenceStatusCodeAdd, {
         
         message <- AddStatusCode(input$referenceStatusCode, 
@@ -38,14 +50,34 @@ referenceStatusCodeModuleServer <- function(id, stringsAsFactors) {
         
         output$outReferenceStatusCodeMessage <- renderText(message)
         
-        output$outReferenceStatusCodeBrowse <-
-          DT::renderDataTable(GetStatusCodes())
+        if (substring(message, 1, 18) == "Status Code Added:")
+        {
+          output$outReferenceStatusCode <- 
+            renderUI(CreateReferenceStatusCodeTextbox(ns))
+        
+          output$outReferenceStatusDescription <-
+            renderUI(CreateReferenceStatusDescriptionTextbox(ns))
+          
+          output$outReferenceStatusCodeBrowse <-
+            DT::renderDataTable(GetStatusCodes())
+        }
       })
-      
-      output$outReferenceStatusCodeBrowse <-
-        DT::renderDataTable(GetStatusCodes())
     }
   )    
+}
+
+CreateReferenceStatusCodeTextbox <- function(ns)
+{
+  return (
+    textInput(ns("referenceStatusCode"), "Code")
+  )
+}
+
+CreateReferenceStatusDescriptionTextbox <- function(ns)
+{
+  return (
+    textInput(ns("referenceStatusDescription"), "Desc")
+  )
 }
 
 GetStatusCodes <- function()
@@ -81,7 +113,7 @@ GetStatusCodes <- function()
   
   return(
     DT::datatable(dfData,
-                  colnames = c("Code", "Desc", "Maint", "User"),
+                  colnames = c("Code", "Desc"),
                   rownames = FALSE,
                   options = list(searching = FALSE))
   )
@@ -91,6 +123,12 @@ AddStatusCode <- function(statusCode, statusDescription)
 {
   if (trimws(statusCode) == "")
     return("Status Code required")
+  
+  if (nchar(statusCode) > 20)
+    return("Status Code too long; limit to 20")
+  
+  if (nchar(StatusDescription) > 100)
+    return("Status Description too long; limit to 100")
 
   ## try connecting to database; if the connection fails, return
   ## text with the error message

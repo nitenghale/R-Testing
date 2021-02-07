@@ -10,10 +10,9 @@ referenceNetworkModuleUI <- function(id, label = "Network Module") {
     fluidPage(
       h1("Networks"),
       fluidRow(
-        column(4, textInput(ns("referenceNetworkName"), "Name")),
-        column(2, textInput(ns("referenceNetworkAbbreviation"), "Abbr")),
-        column(2, numericInput(ns("referenceNetworkChannel"), "Channel", 
-          min = 0, max = 99999.99, value = 0, step = .1))
+        column(4, uiOutput(ns("outReferenceNetworkName"))),
+        column(2, uiOutput(ns("outReferenceNetworkAbbreviation"))),
+        column(2, uiOutput(ns("outReferenceNetworkChannelNumber")))
       ),
       fluidRow(
         column(2, actionButton(ns("referenceNetworkAdd"), "Add"))
@@ -33,22 +32,69 @@ referenceNetworkModuleServer <- function(id, stringsAsFactors) {
     id,
     
     function(input, output, session) {
+      
+      ns <- session$ns
+      
+      output$outReferenceNetworkName <-
+        renderUI(CreateReferenceNetworkNameTextbox(ns))
+      
+      output$outReferenceNetworkAbbreviation <-
+        renderUI(CreateReferenceNetworkAbbreviationTextbox(ns))
+      
+      output$outReferenceNetworkChannelNumber <-
+        renderUI(CreateReferenceNetworkChannelNumberTextbox(ns))
+      
+      output$outReferenceNetworkBrowse <-
+        DT::renderDataTable(GetNetworks())
+      
       observeEvent(input$referenceNetworkAdd, {
         
         message <- AddNetwork(input$referenceNetworkName, 
                               input$referenceNetworkAbbreviation,
-                              input$referenceNetworkChannel)
+                              input$referenceNetworkChannelNumber)
 
         output$outReferenceNetworkMessage <- renderText(message)
+        
+        if (substring(message, 1, 14) == "Network Added:")
+        {
+          output$outReferenceNetworkBrowse <-
+            renderDataTable(GetNetworks())
           
-        output$outReferenceNetworkBrowse <-
-          renderDataTable(GetNetworks())
+          output$outReferenceNetworkName <-
+            renderUI(CreateReferenceNetworkNameTextbox(ns))
+          
+          output$outReferenceNetworkAbbreviation <-
+            renderUI(CreateReferenceNetworkAbbreviationTextbox(ns))
+          
+          output$outReferenceNetworkChannelNumber <-
+            renderUI(CreateReferenceNetworkChannelNumberTextbox(ns))
+        }
       })
-      
-      output$outReferenceNetworkBrowse <-
-        DT::renderDataTable(GetNetworks())
     }
   )    
+}
+
+CreateReferenceNetworkNameTextbox <- function(ns)
+{
+  return (
+    textInput(ns("referenceNetworkName"), "Name")
+  )
+}
+
+CreateReferenceNetworkAbbreviationTextbox <- function(ns)
+{
+  return (
+    textInput(ns("referenceNetworkAbbreviation"), "Abbr")
+  )
+}
+
+CreateReferenceNetworkChannelNumberTextbox <- function(ns)
+{
+  return (
+    numericInput(ns("referenceNetworkChannelNumber"), 
+                    "Channel", 
+                    min = 0, max = 99999.99, value = 0, step = .1)
+  )
 }
 
 GetNetworks <- function()
@@ -84,7 +130,7 @@ GetNetworks <- function()
 
   return(
     DT::datatable(dfData,
-              colnames = c("Abbr", "Name", "Channel", "Maint", "User"),
+              colnames = c("Abbr", "Name", "Channel"),
               rownames = FALSE,
               options = list(searching = FALSE))
   )
@@ -98,6 +144,12 @@ AddNetwork <- function(networkName, networkAbbreviation, channelNumber)
   if (!is.numeric(channelNumber))
     return("Channel Number must be numeric")
   
+  if (nchar(networkName) > 50)
+    return("Network Name too long; limit to 50")
+  
+  if (nchar(networkAbbreviation) > 10)
+    return("Network Abbreviation too long; limit to 10")
+
   ## try connecting to database; if the connection fails, return
   ## text with the error message
   con <- tryCatch(GetDatabaseConnection(),

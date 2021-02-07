@@ -3,7 +3,7 @@
 	,@seriesTitle nvarchar(100)
 	,@seriesYear smallint
 	,@networkId smallint = null
-	,@networkName nvarchar(20) = null
+	,@networkName nvarchar(50) = null
 	,@seriesDescription nvarchar(max) = null
 as
 begin

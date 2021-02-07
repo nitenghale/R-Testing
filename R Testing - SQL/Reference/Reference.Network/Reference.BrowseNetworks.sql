@@ -12,8 +12,8 @@ begin
 		isnull(NetworkAbbreviation, '') as NetworkAbbreviation
 		,NetworkName
 		,isnull(cast(ChannelNumber as varchar(8)), '') as ChannelNumber
-		,LastMaintenanceDateTime
-		,LastMaintenanceUser
+		--,LastMaintenanceDateTime
+		--,LastMaintenanceUser
 	from Reference.Network
 	order by Network.NetworkName
 end

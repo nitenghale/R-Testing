@@ -20,8 +20,8 @@ shinyServer(function(input, output) {
   mediaMovieModule <-
     mediaMovieModuleServer("mediaMovieModule", stringsAsFactors = FALSE)
   
-  ##seriesModule <-
-    ##seriesModuleServer("seriesModule", stringsAsFactors = FALSE)
+  mediaSeriesModule <-
+    mediaSeriesModuleServer("mediaSeriesModule", stringsAsFactors = FALSE)
   
   ##playlistModule <-
     ##playlistModuleServer("playlistModule", stringsAsFactors = FALSE)

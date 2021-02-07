@@ -10,8 +10,8 @@
 	,SeriesYear_After smallint null
 	,NetworkId_Before smallint null
 	,NetworkId_After smallint null
-	,NetworkName_Before nvarchar(20) null
-	,NetworkName_After nvarchar(20) null
+	,NetworkName_Before nvarchar(50) null
+	,NetworkName_After nvarchar(50) null
 	,SeriesDescription_Before nvarchar(max) null
 	,SeriesDescription_After nvarchar(max) null
 )

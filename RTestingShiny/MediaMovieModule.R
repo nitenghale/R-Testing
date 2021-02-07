@@ -11,10 +11,10 @@ mediaMovieModuleUI <- function(id, label = "Movie Module") {
     fluidPage(
       h1("Movies"),
       fluidRow(
-        column(3, textInput(ns("mediaMovieTitle"), "Title")),
-        column(2, dateInput(ns("mediaMovieReleaseDate"), "Release Date")),
+        column(3, uiOutput(ns("outMediaMovieTitle"))),
+        column(2, uiOutput(ns("outMediaMovieReleaseDate"))),
         column(2, uiOutput(ns("outMediaMovieNetwork"))),
-        column(4, textInput(ns("mediaMovieSynopsis"), "Synopsis"))
+        column(4, uiOutput(ns("outMediaMovieSynopsis")))
       ),
       fluidRow(
         column(2, actionButton(ns("mediaMovieAdd"), "Add"))
@@ -34,6 +34,24 @@ mediaMovieModuleServer <- function(id, stringsAsFactors) {
     id,
     ## Below is the module function
     function(input, output, session) {
+      
+      ns <- session$ns
+      
+      output$outMediaMovieTitle <-
+        renderUI(CreateMediaMovieTitleTextbox(ns))
+      
+      output$outMediaMovieReleaseDate <-
+        renderUI(CreateMediaMovieReleaseDatePicker(ns))
+      
+      output$outMediaMovieNetwork <-
+        renderUI(CreateMediaMovieNetworkDropDown(ns))
+      
+      output$outMediaMovieSynopsis <-
+        renderUI(CreateMediaMovieSynopsisTextbox(ns))
+      
+      output$outMediaMovieBrowse <-
+        DT::renderDataTable(GetMovies())
+      
       observeEvent(input$mediaMovieAdd, {
         
         message <- AddMovie(input$mediaMovieTitle, 
@@ -43,20 +61,93 @@ mediaMovieModuleServer <- function(id, stringsAsFactors) {
         
         output$outMediaMovieMessage <- renderText(message)
         
-        output$outMediaMovieBrowse <-
-          DT::renderDataTable(GetMovies())
-        
-        #output$outMediaMovieNetwork <-
-          #renderUI(CreateMediaMovieNetworkDropDown())
+        if (substring(message, 1, 12) == "Movie Added:")
+        {
+          output$outMediaMovieTitle <-
+            renderUI(CreateMediaMovieTitleTextbox(ns))
+          
+          output$outMediaMovieReleaseDate <-
+            renderUI(CreateMediaMovieReleaseDatePicker(ns))
+          
+          output$outMediaMovieNetwork <-
+            renderUI(CreateMediaMovieNetworkDropDown(ns))
+          
+          output$outMediaMovieSynopsis <-
+            renderUI(CreateMediaMovieSynopsisTextbox(ns))
+          
+          output$outMediaMovieBrowse <-
+            DT::renderDataTable(GetMovies())
+        }
       })
-      
-      output$outMediaMovieBrowse <-
-        DT::renderDataTable(GetMovies())
-      
-      output$outMediaMovieNetwork <-
-        renderUI(CreateMediaMovieNetworkDropDown())
     }
   )    
+}
+
+CreateMediaMovieTitleTextbox <- function(ns)
+{
+  return (
+    textInput(ns("mediaMovieTitle"), "Title")
+  )
+}
+
+CreateMediaMovieReleaseDatePicker <- function(ns)
+{
+  return (
+    dateInput(ns("mediaMovieReleaseDate"), "Release Date", min = "1888-01-01")
+  )
+}
+
+CreateMediaMovieNetworkDropDown <- function(ns)
+{
+  ## try connecting to database; if the connection fails, return a
+  ## DT::datatable with the error message
+  con <- tryCatch(GetDatabaseConnection(),
+                  error = function(err) { return(err) })
+  ## above is what assigns the error to con, in message
+  if (typeof(con) == "list")
+    ## function accepts a character string and returns a DT::datatable
+    return(p(paste("Error connecting to database:", con$message)))
+  
+  query <- "exec Reference.ListNetworks"
+  
+  ## try executing command in query, with connection in con
+  ## if the query fails, return a DT::datatable with the error message
+  rs <- tryCatch(dbSendQuery(con, query),
+                 error = function(err) { return(err) })
+  ## above is what assigns the error to rs, in message
+  if (typeof(rs) == "list")
+  {
+    dbDisconnect(con)
+    ## function accepts a character string and returns a DT::datatable
+    return(p(paste("Error executing command:", rs$message)))
+  }
+  
+  dfData <- dbFetch(rs)
+  dbClearResult(rs)
+  dbDisconnect(con)
+  
+  choices <- list("")
+  
+  if (length(dfData$NetworkName) > 0) {
+    for (i in 1:length(dfData$NetworkName)) {
+      choices <- c(choices, list(dfData$NetworkName[i]))
+    }
+  }
+  
+  return(
+    selectInput(
+      ns("mediaMovieNetwork"),
+      "Network",
+      choices = choices
+    )
+  )
+}
+
+CreateMediaMovieSynopsisTextbox <- function(ns)
+{
+  return (
+    textInput(ns("mediaMovieSynopsis"), "Synopsis")
+  )
 }
 
 GetMovies <- function()
@@ -98,52 +189,6 @@ GetMovies <- function()
   )
 }
 
-CreateMediaMovieNetworkDropDown <- function()
-{
-  ## try connecting to database; if the connection fails, return a
-  ## DT::datatable with the error message
-  con <- tryCatch(GetDatabaseConnection(),
-                  error = function(err) { return(err) })
-  ## above is what assigns the error to con, in message
-  if (typeof(con) == "list")
-    ## function accepts a character string and returns a DT::datatable
-    return(p(paste("Error connecting to database:", con$message)))
-  
-  query <- "exec Reference.ListNetworks"
-  
-  ## try executing command in query, with connection in con
-  ## if the query fails, return a DT::datatable with the error message
-  rs <- tryCatch(dbSendQuery(con, query),
-                 error = function(err) { return(err) })
-  ## above is what assigns the error to rs, in message
-  if (typeof(rs) == "list")
-  {
-    dbDisconnect(con)
-    ## function accepts a character string and returns a DT::datatable
-    return(p(paste("Error executing command:", rs$message)))
-  }
-  
-  dfData <- dbFetch(rs)
-  dbClearResult(rs)
-  dbDisconnect(con)
-
-  choices <- list("")
-
-  if (length(dfData$NetworkName) > 0) {
-    for (i in 1:length(dfData$NetworkName)) {
-      choices <- c(choices, list(dfData$NetworkName[i]))
-    }
-  }
-
-  return(
-    selectInput(
-      "mediaMovieNetwork",
-      "Network",
-      choices = choices
-    )
-  )
-}
-
 AddMovie <- function(title, releaseDate, networkName, synopsis)
 {
   if (trimws(title) == "")
@@ -156,12 +201,13 @@ AddMovie <- function(title, releaseDate, networkName, synopsis)
     return("Invalid Release Date")
   
   if (length(networkName) < 1)
-    return("Network required - length error")
+    return("Network required")
   
   if (trimws(networkName) == "")
     return("Network required")
   
-  return(networkName)
+  if (nchar(title) > 100)
+    return("Movie Title too long; limit to 100")
   
   ## try connecting to database; if the connection fails, return
   ## text with the error message
@@ -192,5 +238,5 @@ AddMovie <- function(title, releaseDate, networkName, synopsis)
   dbClearResult(rs)
   dbDisconnect(con)
   
-  return(paste("Move Added:", title))
+  return(paste("Movie Added:", title))
 }
