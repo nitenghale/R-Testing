@@ -11,21 +11,24 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-  referenceNetworkModule <- 
+  referenceNetworkModule <-
     referenceNetworkModuleServer("referenceNetworkModule", stringsAsFactors = FALSE)
-  
+
   referenceStatusCodeModule <-
     referenceStatusCodeModuleServer("referenceStatusCodeModule", stringsAsFactors = FALSE)
-  
+
   mediaMovieModule <-
     mediaMovieModuleServer("mediaMovieModule", stringsAsFactors = FALSE)
-  
+
   mediaSeriesModule <-
     mediaSeriesModuleServer("mediaSeriesModule", stringsAsFactors = FALSE)
-  
+
+  mediaEpisodeModule <-
+    mediaEpisodeModuleServer("mediaEpisodeModule", stringsAsFactors = FALSE)
+
   ##playlistModule <-
     ##playlistModuleServer("playlistModule", stringsAsFactors = FALSE)
-  
+
   ##recordingModule <-
     ##recordingModuleServer("recordingModule", stringsAsFactors = FALSE)
 })

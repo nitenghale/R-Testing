@@ -6,16 +6,6 @@
 #
 #    http://shiny.rstudio.com/
 #
-source("RCommon.R")
-source("ReferenceNetworkModule.R")
-source("ReferenceStatusCodeModule.R")
-source("MediaMovieModule.R")
-source("MediaSeriesModule.R")
-source("MediaPlaylistModule.R")
-source("MediaRecordingModule.R")
-
-library(shiny)
-library(shinydashboard)
 
 # Define UI for application that draws a histogram
 shinyUI(
@@ -38,17 +28,17 @@ shinyUI(
       tabItems(
         tabItem(tabName = "homeMenu",
           h1("Home")),
-        tabItem(tabName = "referenceNetworkMenu", 
+        tabItem(tabName = "referenceNetworkMenu",
           referenceNetworkModuleUI("referenceNetworkModule", "Network Module")),
-        tabItem(tabName = "referenceStatusMenu", 
+        tabItem(tabName = "referenceStatusMenu",
           referenceStatusCodeModuleUI("referenceStatusCodeModule", "Status Code Module")),
         tabItem(tabName = "mediaMovieMenu",
           mediaMovieModuleUI("mediaMovieModule", "Movie Module")),
-        tabItem(tabName = "mediaSeriesMenu", 
+        tabItem(tabName = "mediaSeriesMenu",
           mediaSeriesModuleUI("mediaSeriesModule", "Series Module"))
-        ##tabItem(tabName = "mediaPlaylistMenu", 
+        ##tabItem(tabName = "mediaPlaylistMenu",
           ##playlistModuleUI("playlistModule", "Playlist Module")),
-        ##tabItem(tabName = "mediaRecordingsMenu", 
+        ##tabItem(tabName = "mediaRecordingsMenu",
           ##recordingModuleUI("recordingModule", "Recording Module"))
       )
     )

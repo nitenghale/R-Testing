@@ -47,6 +47,12 @@ referenceNetworkModuleServer <- function(id, stringsAsFactors) {
       output$outReferenceNetworkBrowse <-
         DT::renderDataTable(GetNetworks())
       
+      observeEvent(input$outReferenceNetworkBrowse_rows_selected, {
+        output$outReferenceNetworkMessage <-
+          renderText(input$outReferenceNetworkBrowse_rows_selected)
+      })
+      
+      ## Add button clicked
       observeEvent(input$referenceNetworkAdd, {
         
         message <- AddNetwork(input$referenceNetworkName, 
@@ -132,6 +138,7 @@ GetNetworks <- function()
     DT::datatable(dfData,
               colnames = c("Abbr", "Name", "Channel"),
               rownames = FALSE,
+              selection = "single",
               options = list(searching = FALSE))
   )
 }

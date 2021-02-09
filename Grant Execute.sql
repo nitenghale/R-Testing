@@ -37,7 +37,7 @@ exec Media.BrowseMovies
 
 exec Reference.ListNetworks
 
-exec Reference.AddNetwork @networkName = 'NP Test 3'
+--exec Reference.AddNetwork @networkName = 'NP Test 3'
 
 select * from Media.Series
 
@@ -46,6 +46,10 @@ exec Media.BrowseSeries
 grant execute on Media.BrowseSeries to RTesting
 grant insert, update, delete on Media.Series to RTesting
 grant execute on Media.AddSeries to RTesting
+grant execute on Media.ListSeries to RTesting
 
+exec Media.BrowseEpisodes @seriesTitle = 'Testing 2', @seriesYear = 2021
 
-exec Media.AddSeries @seriesUid = 'NULL', @seriesTitle = 'Testing 1', @seriesYear = 2021, @networkName = 'Columbia Broadcastin', @seriesDescription = 'NULL'
+grant execute on Media.BrowseEpisodes to RTesting
+grant insert, update, delete on Media.Episode to RTesting
+grant execute on Media.AddEpisode to RTesting
