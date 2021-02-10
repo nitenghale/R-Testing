@@ -3,9 +3,9 @@ referenceNetworkModuleUI <- function(id, label = "Network Module") {
   # `NS(id)` returns a namespace function, which was save as `ns` and will
   # invoke later.
   ns <- NS(id)
-  
+
   library(DT)
-  
+
   tagList(
     fluidPage(
       h1("Networks"),
@@ -15,7 +15,7 @@ referenceNetworkModuleUI <- function(id, label = "Network Module") {
         column(2, uiOutput(ns("outReferenceNetworkChannelNumber")))
       ),
       fluidRow(
-        column(2, actionButton(ns("referenceNetworkAdd"), "Add"))
+        column(2, uiOutput(ns("outReferenceNetworkActionButton")))
       ),
       fluidRow(
         column(12, textOutput(ns("outReferenceNetworkMessage")))
@@ -30,98 +30,159 @@ referenceNetworkModuleUI <- function(id, label = "Network Module") {
 referenceNetworkModuleServer <- function(id, stringsAsFactors) {
   moduleServer(
     id,
-    
+
     function(input, output, session) {
-      
+
       ns <- session$ns
-      
+
       output$outReferenceNetworkName <-
         renderUI(CreateReferenceNetworkNameTextbox(ns))
-      
+
       output$outReferenceNetworkAbbreviation <-
         renderUI(CreateReferenceNetworkAbbreviationTextbox(ns))
-      
+
       output$outReferenceNetworkChannelNumber <-
         renderUI(CreateReferenceNetworkChannelNumberTextbox(ns))
-      
+
+      output$outReferenceNetworkActionButton <-
+        renderUI(CreateReferenceNetworkActionButton(ns, "Add"))
+
+      ########
+      networkData <- GetNetworkData()
+
       output$outReferenceNetworkBrowse <-
-        DT::renderDataTable(GetNetworks())
-      
-      observeEvent(input$outReferenceNetworkBrowse_rows_selected, {
-        output$outReferenceNetworkMessage <-
-          renderText(input$outReferenceNetworkBrowse_rows_selected)
-      })
-      
+        DT::renderDataTable(GetNetworks(networkData))
+
       ## Add button clicked
       observeEvent(input$referenceNetworkAdd, {
-        
-        message <- AddNetwork(input$referenceNetworkName, 
+
+        message <- AddNetwork(input$referenceNetworkName,
                               input$referenceNetworkAbbreviation,
                               input$referenceNetworkChannelNumber)
 
         output$outReferenceNetworkMessage <- renderText(message)
-        
+
         if (substring(message, 1, 14) == "Network Added:")
         {
-          output$outReferenceNetworkBrowse <-
-            renderDataTable(GetNetworks())
-          
           output$outReferenceNetworkName <-
             renderUI(CreateReferenceNetworkNameTextbox(ns))
-          
+
           output$outReferenceNetworkAbbreviation <-
             renderUI(CreateReferenceNetworkAbbreviationTextbox(ns))
-          
+
           output$outReferenceNetworkChannelNumber <-
             renderUI(CreateReferenceNetworkChannelNumberTextbox(ns))
+
+          ########
+          networkData <- GetNetworkData()
+
+          output$outReferenceNetworkBrowse <-
+            DT::renderDataTable(GetNetworks(networkData))
         }
       })
+
+      ## row selected
+      observeEvent(input$outReferenceNetworkBrowse_rows_selected, {
+        output$outReferenceNetworkName <-
+          renderUI(CreateReferenceNetworkNameTextbox(
+            ns,
+            input$outReferenceNetworkBrowse_rows_selected,
+            networkData))
+
+        output$outReferenceNetworkAbbreviation <-
+          renderUI(CreateReferenceNetworkAbbreviationTextbox(
+            ns,
+            input$outReferenceNetworkBrowse_rows_selected,
+            networkData))
+
+        output$outReferenceNetworkChannelNumber <-
+          renderUI(CreateReferenceNetworkChannelNumberTextbox(
+            ns,
+            input$outReferenceNetworkBrowse_rows_selected,
+            networkData))
+
+        output$outReferenceNetworkActionButton <-
+          renderUI(CreateReferenceNetworkActionButton(ns, "Update"))
+
+        output$outReferenceNetworkMessage <- renderText(networkData$NetworkId[input$outReferenceNetworkBrowse_rows_selected])
+      })
     }
-  )    
-}
-
-CreateReferenceNetworkNameTextbox <- function(ns)
-{
-  return (
-    textInput(ns("referenceNetworkName"), "Name")
   )
 }
 
-CreateReferenceNetworkAbbreviationTextbox <- function(ns)
+CreateReferenceNetworkNameTextbox <- function(ns, rowIndex = NA, dfData = NA)
 {
+  inputValue <- ""
+  if (missing(rowIndex) || length(rowIndex) < 1 || is.na(rowIndex) ||
+      missing(dfData) || length(dfData) < 1 || is.na(dfData))
+    inputValue <- ""
+  else
+    inputValue <- dfData$NetworkName[rowIndex]
+
   return (
-    textInput(ns("referenceNetworkAbbreviation"), "Abbr")
+    textInput(ns("referenceNetworkName"), "Name", inputValue)
   )
 }
 
-CreateReferenceNetworkChannelNumberTextbox <- function(ns)
+CreateReferenceNetworkAbbreviationTextbox <- function(ns, rowIndex = NA, dfData = NA)
 {
+  inputValue <- ""
+  if (missing(rowIndex) || length(rowIndex) < 1 || is.na(rowIndex) ||
+      missing(dfData) || length(dfData) < 1 || is.na(dfData))
+    inputValue <- ""
+  else
+    inputValue <- dfData$NetworkAbbreviation[rowIndex]
+
   return (
-    numericInput(ns("referenceNetworkChannelNumber"), 
-                    "Channel", 
-                    min = 0, max = 99999.99, value = 0, step = .1)
+    textInput(ns("referenceNetworkAbbreviation"), "Abbr", inputValue)
   )
 }
 
-GetNetworks <- function()
+CreateReferenceNetworkChannelNumberTextbox <- function(ns, rowIndex = NA, dfData = NA)
+{
+  inputValue <- 0
+  if (missing(rowIndex) || length(rowIndex) < 1 || is.na(rowIndex) ||
+      missing(dfData) || length(dfData) < 1 || is.na(dfData))
+    inputValue <- 0
+  else
+    inputValue <- dfData$ChannelNumber[rowIndex]
+
+  return (
+    numericInput(ns("referenceNetworkChannelNumber"),
+                    "Channel",
+                    min = 0, max = 99999.99, value = inputValue, step = .1)
+  )
+}
+
+CreateReferenceNetworkActionButton <- function(ns, action)
+{
+  if (action == "Add")
+    return(actionButton(ns("referenceNetworkAdd"), "Add"))
+  else if (action == "Update")
+    return(actionButton(ns("referenceNetworkUpdate"), "Update"))
+  else if (action == "Delete")
+    return(actionButton(ns("referenceNetworkDelete"), "Delete"))
+}
+
+GetNetworkData <- function()
 {
   ## try connecting to database; if the connection fails, return a
   ## DT::datatable with the error message
   con <- tryCatch(GetDatabaseConnection(),
-                    error = function(err) { return(err) })
-                    ## above is what assigns the error to con, in message
+                  error = function(err) { return(err) })
+  ## above is what assigns the error to con, in message
   if (typeof(con) == "list")
     ## function accepts a character string and returns a DT::datatable
     return(ReturnErrorDataTable(paste("Error connecting to database:",
                                       con$message)))
 
   query <- "exec Reference.BrowseNetworks"
-  
+
   ## try executing command in query, with connection in con
   ## if the query fails, return a DT::datatable with the error message
   rs <- tryCatch(dbSendQuery(con, query),
-                  error = function(err) { return(err) })
-                  ## above is what assigns the error to rs, in message
+                 error = function(err) { return(err) })
+  ## above is what assigns the error to rs, in message
   if (typeof(rs) == "list")
   {
     dbDisconnect(con)
@@ -129,11 +190,17 @@ GetNetworks <- function()
     return(ReturnErrorDataTable(paste("Error executing command:",
                                       rs$message)))
   }
-  
+
   dfData <- dbFetch(rs)
   dbClearResult(rs)
   dbDisconnect(con)
 
+  return(dfData)
+}
+
+GetNetworks <- function(networkData)
+{
+  dfData <- networkData[2:4]
   return(
     DT::datatable(dfData,
               colnames = c("Abbr", "Name", "Channel"),
@@ -147,13 +214,13 @@ AddNetwork <- function(networkName, networkAbbreviation, channelNumber)
 {
   if (trimws(networkName) == "")
     return("Network Name required")
-  
-  if (!is.numeric(channelNumber))
+
+  if (!is.na(channelNumber) && !is.numeric(channelNumber))
     return("Channel Number must be numeric")
-  
+
   if (nchar(networkName) > 50)
     return("Network Name too long; limit to 50")
-  
+
   if (nchar(networkAbbreviation) > 10)
     return("Network Abbreviation too long; limit to 10")
 
@@ -164,15 +231,17 @@ AddNetwork <- function(networkName, networkAbbreviation, channelNumber)
                   ## above is what assigns the error to con, in message
   if (typeof(con) == "list")
     return(paste("Error connecting to database:", con$message))
-  
-  query <- paste("exec Reference.AddNetwork @networkName = '", networkName,
-                 "', @channelNumber = ", channelNumber, sep = "")
-  
+
+  query <- paste("exec Reference.AddNetwork @networkName = '", networkName, "'", sep = "")
+
   if (trimws(networkAbbreviation) != "")
-    query <- paste(query, 
-                   ", @networkAbbreviation = '", 
+    query <- paste(query,
+                   ", @networkAbbreviation = '",
                    networkAbbreviation, "'", sep = "")
-  
+
+  if (!is.na(channelNumber))
+    query <- paste(query, ", @channelNumber = ", channelNumber, sep = "")
+
   ## try executing command in query, with connection in con
   ## if the query fails, return text with the error message
   rs <- tryCatch(dbSendQuery(con, query),
@@ -183,9 +252,9 @@ AddNetwork <- function(networkName, networkAbbreviation, channelNumber)
     dbDisconnect(con)
     return(paste("Error executing command:", rs$message))
   }
-  
+
   dbClearResult(rs)
   dbDisconnect(con)
-  
+
   return(paste("Network Added:", networkName))
 }

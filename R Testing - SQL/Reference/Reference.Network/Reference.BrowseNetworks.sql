@@ -8,8 +8,8 @@ begin
 
 
 	select
-		--NetworkId
-		isnull(NetworkAbbreviation, '') as NetworkAbbreviation
+		NetworkId
+		,isnull(NetworkAbbreviation, '') as NetworkAbbreviation
 		,NetworkName
 		,isnull(cast(ChannelNumber as varchar(8)), '') as ChannelNumber
 		--,LastMaintenanceDateTime
