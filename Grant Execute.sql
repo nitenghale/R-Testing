@@ -10,6 +10,7 @@ exec sp_who2
 
 grant execute on Reference.BrowseNetworks to RTesting
 grant execute on Reference.AddNetwork to RTesting
+grant execute on Reference.UpdateNetwork to RTesting
 grant insert, update, delete on Reference.Network to RTesting
 
 grant execute on Reference.BrowseStatusCodes to RTesting
