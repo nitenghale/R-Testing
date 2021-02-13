@@ -13,3 +13,7 @@ begin
 
 	return @seriesUid
 end
+go
+
+grant execute on Media.GetSeriesUidFromSeriesTitleAndYear to RTesting
+go

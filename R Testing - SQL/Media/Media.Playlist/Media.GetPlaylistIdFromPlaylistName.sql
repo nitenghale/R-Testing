@@ -8,3 +8,7 @@ begin
 
 	return @playlistId
 end
+go
+
+grant execute on Media.GetPlaylistIdFromPlaylistName to RTesting
+go

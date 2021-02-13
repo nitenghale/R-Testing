@@ -21,3 +21,6 @@ begin
 	return @episodeUid
 end
 go
+
+grant execute on Media.GetEpisodeUidFromEpisodeTitle to RTesting
+go

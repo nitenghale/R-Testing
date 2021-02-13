@@ -8,3 +8,7 @@ begin
 
 	return @playlistSequence
 end
+go
+
+grant execute on Media.PlaylistMediaGetNextPlaylistSequence to RTesting
+go

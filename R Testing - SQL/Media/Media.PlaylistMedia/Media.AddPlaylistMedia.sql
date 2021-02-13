@@ -68,3 +68,7 @@ begin
 		,@playlistSequence
 	)
 end
+go
+
+grant execute on Media.AddPlaylistMedia to RTesting
+go

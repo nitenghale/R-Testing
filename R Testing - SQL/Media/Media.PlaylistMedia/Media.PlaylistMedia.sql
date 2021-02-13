@@ -13,7 +13,7 @@ go
 alter table Media.PlaylistMedia add constraint PK_PlaylistMedia primary key clustered (PlaylistMediaId)
 go
 
-create unique nonclustered index IX_PlaylistMedia_PlaylistId_PlaylistSequence on Media.PlaylistMedia (PlaylistId, PlaylistSequence)
+create unique nonclustered index IX_PlaylistMedia_PlaylistId_PlaylistSequence on Media.PlaylistMedia (PlaylistId, PlaylistSequence) on IndexData
 go
 
 alter table Media.PlaylistMedia add constraint FK_PlaylistMedia_Playlist foreign key (PlaylistId) references Media.Playlist (PlaylistId)
@@ -26,6 +26,9 @@ alter table Media.PlaylistMedia add constraint DF_PlaylistMedia_LastMaintenanceD
 go
 
 alter table Media.PlaylistMedia add constraint DF_PlaylistMedia_LastMaintenanceUser default (system_user) for LastMaintenanceUser
+go
+
+grant select, insert, update, delete on Media.PlaylistMedia to RTesting
 go
 
 create trigger Media.PlaylistMedia_Insert

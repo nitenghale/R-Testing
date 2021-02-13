@@ -37,3 +37,7 @@ begin
 	where PlaylistId = @playlistId
 	order by PlaylistSequence
 end
+go
+
+grant execute on Media.BrowsePlaylistMedia to RTesting
+go

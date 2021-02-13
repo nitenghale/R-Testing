@@ -1,1 +1,0 @@
-﻿alter table Reference.StatusCode add constraint PK_StatusCode primary key clustered (StatusCodeId)

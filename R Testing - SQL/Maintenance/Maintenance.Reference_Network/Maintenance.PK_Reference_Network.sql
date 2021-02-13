@@ -1,1 +1,0 @@
-﻿alter table Maintenance.Reference_Network add constraint PK_Reference_Network primary key clustered (MaintenanceDateTime, NetworkId)

@@ -7,8 +7,8 @@ begin
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = null
 
 	select
-		--SeriesUid
-		SeriesTitle
+		SeriesUid
+		,SeriesTitle
 		,SeriesYear
 		--,Series.NetworkId
 		,NetworkName
@@ -23,3 +23,7 @@ begin
 		SeriesTitle
 		,SeriesYear
 end
+go
+
+grant execute on Media.BrowseSeries to RTesting
+go

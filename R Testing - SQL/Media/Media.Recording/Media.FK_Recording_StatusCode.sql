@@ -1,1 +1,0 @@
-﻿alter table Media.Recording add constraint FK_Recording_StatusCode foreign key (StatusCodeId) references Reference.StatusCode (StatusCodeId)

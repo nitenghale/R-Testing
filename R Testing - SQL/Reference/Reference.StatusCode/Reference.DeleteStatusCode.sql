@@ -12,3 +12,7 @@ begin
 	delete from Reference.StatusCode
 	where StatusCodeId = @statusCodeId
 end
+go
+
+grant execute on Reference.DeleteStatusCode to RTesting
+go

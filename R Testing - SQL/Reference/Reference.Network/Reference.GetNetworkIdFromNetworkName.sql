@@ -8,3 +8,7 @@ begin
 
 	return @networkId
 end
+go
+
+grant execute on Reference.GetNetworkIdFromNetworkName to RTesting
+go

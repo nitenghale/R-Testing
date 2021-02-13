@@ -17,3 +17,7 @@ begin
 	from Reference.Network
 	order by Network.NetworkName
 end
+go
+
+grant execute on Reference.BrowseNetworks to RTesting
+go

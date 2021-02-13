@@ -22,3 +22,7 @@ begin
 		,@statusDescription
 	)
 end
+go
+
+grant execute on Reference.AddStatusCode to RTesting
+go

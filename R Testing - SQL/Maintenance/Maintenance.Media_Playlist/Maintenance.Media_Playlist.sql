@@ -17,3 +17,9 @@ go
 
 alter table Maintenance.Media_Playlist add constraint DF_Media_Playlist_MaintenanceUser default (system_user) for MaintenanceUser
 go
+
+grant select, insert on Maintenance.Media_Playlist to RTesting
+go
+
+deny update, delete on Maintenance.Media_Playlist to RTesting
+go

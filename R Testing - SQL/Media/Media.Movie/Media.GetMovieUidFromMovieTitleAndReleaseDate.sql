@@ -8,3 +8,7 @@ begin
 
 	 return @movieUid
 end
+go
+
+grant execute on Media.GetMovieUidFromMovieTitleAndReleaseDate to RTesting
+go

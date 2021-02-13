@@ -26,3 +26,7 @@ begin
 		,@channelNumber
 	)
 end
+go
+
+grant execute on Reference.AddNetwork to RTesting
+go

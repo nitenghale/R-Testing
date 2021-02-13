@@ -1,0 +1,4 @@
+﻿CREATE USER [RTesting] FOR LOGIN [RTesting] WITH DEFAULT_SCHEMA=[dbo]
+go
+
+GRANT CONNECT TO [RTesting]

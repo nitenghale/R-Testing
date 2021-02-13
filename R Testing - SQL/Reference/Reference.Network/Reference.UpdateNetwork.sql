@@ -24,3 +24,7 @@ begin
 		,LastMaintenanceUser = system_user
 	where NetworkId = @networkId
 end
+go
+
+grant execute on Reference.UpdateNetwork to RTesting
+go

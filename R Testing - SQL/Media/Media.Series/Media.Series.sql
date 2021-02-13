@@ -17,7 +17,7 @@ go
 create unique clustered index IX_Series_AddDateTime on Media.Series (AddDateTime, SeriesUid)
 go
 
-create unique nonclustered index IX_Series_SeriesTitle_SeriesYear on Media.Series (SeriesTitle, SeriesYear)
+create unique nonclustered index IX_Series_SeriesTitle_SeriesYear on Media.Series (SeriesTitle, SeriesYear) on IndexData
 go
 
 alter table Media.Series add constraint FK_Series_Network foreign key (NetworkId) references Reference.Network (NetworkId)
@@ -33,6 +33,9 @@ alter table Media.Series add constraint DF_Series_LastMaintenanceDateTime defaul
 go
 
 alter table Media.Series add constraint DF_Series_LastMaintenanceUser default (system_user) for LastMaintenanceUser
+go
+
+grant select, insert, update, delete on Media.Series to RTesting
 go
 
 create trigger Media.Series_Insert

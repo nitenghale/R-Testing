@@ -7,11 +7,15 @@ begin
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = null
 
 	select
-		--StatusCodeId
-		StatusCode
+		StatusCodeId
+		,StatusCode
 		,StatusDescription
 		--,LastMaintenanceDateTime
 		--,LastMaintenanceUser
 	from Reference.StatusCode
 	order by StatusCode
 end
+go
+
+grant execute on Reference.BrowseStatusCodes to RTesting
+go

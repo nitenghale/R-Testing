@@ -10,3 +10,7 @@ begin
 	from Reference.MediaAttributeType
 	order by MediaAttributeType
 end
+go
+
+grant execute on Reference.ListMediaAttributeTypes to RTesting
+go

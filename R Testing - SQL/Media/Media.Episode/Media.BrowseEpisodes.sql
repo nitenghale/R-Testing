@@ -17,10 +17,10 @@ begin
 		set @seriesUid = Media.GetSeriesUidFromSeriesTitleAndYear(@seriesTitle, @seriesYear)
 
 	select
-		--EpisodeUid
+		EpisodeUid
 		--,Series.SeriesTitle
 		--,Series.SeriesYear
-		SeasonNumber
+		,SeasonNumber
 		,EpisodeNumber
 		,EpisodeTitle
 		,OriginalAirDate
@@ -36,3 +36,7 @@ begin
 		SeasonNumber
 		,EpisodeNumber
 end
+go
+
+grant execute on Media.BrowseEpisodes to RTesting
+go

@@ -12,3 +12,7 @@ begin
 	delete from Media.Playlist
 	where PlaylistId = @playlistId
 end
+go
+
+grant execute on Media.DeletePlaylist to RTesting
+go

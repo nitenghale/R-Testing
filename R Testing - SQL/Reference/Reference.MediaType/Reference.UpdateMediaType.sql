@@ -21,3 +21,7 @@ begin
 		,LastMaintenanceUser = system_user
 	where MediaTypeId = @mediaTypeId
 end
+go
+
+grant execute on Reference.UpdateMediaType to RTesting
+go

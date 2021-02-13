@@ -127,28 +127,32 @@ referenceNetworkModuleServer <- function(id, stringsAsFactors) {
 
         output$outReferenceNetworkMessage <- renderText(message)
 
-        output$outReferenceNetworkName <-
-          renderUI(CreateReferenceNetworkNameTextbox(
-            ns = ns,
-            passedValue = input$referenceNetworkName))
+        if (substring(message, 1, 16) == "Network Updated:")
+        {
+          output$outReferenceNetworkName <-
+            renderUI(CreateReferenceNetworkNameTextbox(
+              ns = ns))#,
+              #passedValue = input$referenceNetworkName))
 
-        output$outReferenceNetworkAbbreviation <-
-          renderUI(CreateReferenceNetworkAbbreviationTextbox(
-            ns = ns,
-            passedValue = input$referenceNetworkAbbreviation))
+          output$outReferenceNetworkAbbreviation <-
+            renderUI(CreateReferenceNetworkAbbreviationTextbox(
+              ns = ns))#,
+              #passedValue = input$referenceNetworkAbbreviation))
 
-        output$outReferenceNetworkChannelNumber <-
-          renderUI(CreateReferenceNetworkChannelNumberTextbox(
-            ns = ns,
-            passedValue = input$referenceNetworkChannelNumber))
+          output$outReferenceNetworkChannelNumber <-
+            renderUI(CreateReferenceNetworkChannelNumberTextbox(
+              ns = ns))#,
+              #passedValue = input$referenceNetworkChannelNumber))
 
-        output$outReferenceNetworkActionButton <-
-          renderUI(CreateReferenceNetworkActionButton(ns, "Update"))
-        ########
-        updateData()
+          output$outReferenceNetworkActionButton <-
+            renderUI(CreateReferenceNetworkActionButton(ns, "Add"))
 
-        output$outReferenceNetworkBrowse <-
-          DT::renderDataTable(GetNetworks(values$networkData))
+          ########
+          updateData()
+
+          output$outReferenceNetworkBrowse <-
+            DT::renderDataTable(GetNetworks(values$networkData))
+        }
       })
 
       ## Refresh button clicked
@@ -274,6 +278,10 @@ GetNetworkData <- function()
 GetNetworks <- function(networkData)
 {
   dfData <- networkData[2:4]
+
+  if (nrow(dfData) < 1)
+    return(ReturnErrorDataTable("No data found"))
+
   return(
     DT::datatable(dfData,
               colnames = c("Abbr", "Name", "Channel"),

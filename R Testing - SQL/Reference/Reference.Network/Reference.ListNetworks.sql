@@ -10,3 +10,7 @@ begin
 	from Reference.Network
 	order by NetworkName
 end
+go
+
+grant execute on Reference.ListNetworks to RTesting
+go

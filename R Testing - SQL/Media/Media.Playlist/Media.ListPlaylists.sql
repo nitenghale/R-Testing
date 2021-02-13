@@ -10,3 +10,7 @@ begin
 	from Media.Playlist
 	order by PlaylistName
 end
+go
+
+grant execute on Media.ListPlaylists to RTesting
+go

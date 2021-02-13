@@ -52,3 +52,7 @@ begin
 		,@synopsis
 	)
 end
+go
+
+grant execute on Media.AddEpisode to RTesting
+go

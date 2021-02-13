@@ -8,3 +8,7 @@ begin
 
 	return @statusCodeId
 end
+go
+
+grant execute on Reference.GetStatusCodeIdFromStatusCode to RTesting
+go

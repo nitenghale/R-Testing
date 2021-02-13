@@ -12,3 +12,7 @@ begin
 	delete from Media.Movie
 	where MovieUid = @movieUid
 end
+go
+
+grant execute on Media.DeleteMovie to RTesting
+go

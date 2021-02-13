@@ -12,3 +12,7 @@ begin
 	delete from Reference.MediaAttributeType
 	where MediaAttributeTypeId = @mediaAttributeTypeId
 end
+go
+
+grant execute on Reference.DeleteMediaAttributeType to RTesting
+go

@@ -1,1 +1,0 @@
-﻿alter table Media.Recording add constraint PK_Recording primary key clustered (RecordingId)

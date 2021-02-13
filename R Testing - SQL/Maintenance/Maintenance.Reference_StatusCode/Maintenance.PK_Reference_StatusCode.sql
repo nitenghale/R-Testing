@@ -1,1 +1,0 @@
-﻿alter table Maintenance.Reference_StatusCode add constraint PK_Reference_StatusCode primary key clustered (MaintenanceDateTime, StatusCodeId)

@@ -18,3 +18,7 @@ begin
 		,LastMaintenanceUser = system_user
 	where PlaylistId = @playlistId
 end
+go
+
+grant execute on Media.UpdatePlaylist to RTesting
+go

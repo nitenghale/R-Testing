@@ -20,3 +20,7 @@ begin
 
 	return @movieUid
 end
+go
+
+grant execute on Media.GetMovieUidFromMovieTitle to RTesting
+go

@@ -8,3 +8,7 @@ begin
 
 	return @mediaTypeId
 end
+go
+
+grant execute on Reference.GetMediaTypeIdFromMediaType to RTesting
+go

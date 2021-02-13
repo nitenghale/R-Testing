@@ -1,1 +1,0 @@
-﻿alter table Reference.Network add constraint DF_Network_LastMaintenanceDateTime default (getdate()) for LastMaintenanceDateTime

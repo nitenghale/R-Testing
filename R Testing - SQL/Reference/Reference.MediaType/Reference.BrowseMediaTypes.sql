@@ -15,3 +15,7 @@ begin
 	from Reference.MediaType
 	order by MediaType
 end
+go
+
+grant execute on Reference.BrowseMediaTypes to RTesting
+go

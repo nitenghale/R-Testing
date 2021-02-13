@@ -1,1 +1,0 @@
-﻿alter table Reference.MediaAttributeType add constraint DF_MediaAttributeType_LastMaintenanceDateTime default (getdate()) for LastMaintenanceDateTime

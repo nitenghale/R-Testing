@@ -12,3 +12,7 @@ begin
 	delete from Media.Episode
 	where EpisodeUid = @episodeUid
 end
+go
+
+grant execute on Media.DeleteEpisode to RTesting
+go

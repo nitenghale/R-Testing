@@ -10,13 +10,16 @@ go
 alter table Media.Playlist add constraint PK_Playlist primary key clustered (PlaylistId)
 go
 
-create unique nonclustered index IX_Playlist_PlaylistName on Media.Playlist (PlaylistName)
+create unique nonclustered index IX_Playlist_PlaylistName on Media.Playlist (PlaylistName) on IndexData
 go
 
 alter table Media.Playlist add constraint DF_Playlist_LastMaintenanceDateTime default (getdate()) for LastMaintenanceDateTime
 go
 
 alter table Media.Playlist add constraint DF_Playlist_LastMaintenanceUser default (system_user) for LastMaintenanceUser
+go
+
+grant select, insert, update, delete on Media.Playlist to RTesting
 go
 
 create trigger Media.Playlist_Insert

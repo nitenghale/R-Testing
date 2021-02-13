@@ -7,8 +7,8 @@ begin
 	exec Activity.ActivityLogAdd @objectName = @objectName, @objectParameters = null
 
 	select
-		--MovieUid
-		MovieTitle
+		MovieUid
+		,MovieTitle
 		,ReleaseDate
 		--,Movie.NetworkId
 		--,Network.NetworkAbbreviation
@@ -25,3 +25,7 @@ begin
 		MovieTitle
 		,ReleaseDate
 end
+go
+
+grant execute on Media.BrowseMovies to RTesting
+go

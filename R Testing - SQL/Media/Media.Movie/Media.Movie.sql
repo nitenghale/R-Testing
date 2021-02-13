@@ -17,7 +17,7 @@ go
 create unique clustered index IX_Movie_AddDateTime on Media.Movie (AddDateTime, MovieUid)
 go
 
-create unique nonclustered index IX_Movie_MovieTitle_ReleaseDate on Media.Movie (MovieTitle, ReleaseDate)
+create unique nonclustered index IX_Movie_MovieTitle_ReleaseDate on Media.Movie (MovieTitle, ReleaseDate) on IndexData
 go
 
 alter table Media.Movie add constraint FK_Movie_Network foreign key (NetworkId) references Reference.Network (NetworkId)
@@ -33,6 +33,9 @@ alter table Media.Movie add constraint DF_Movie_LastMaintenanceDateTime default 
 go
 
 alter table Media.Movie add constraint DF_Movie_LastMaintenanceUser default (system_user) for LastMaintenanceUser
+go
+
+grant select, insert, update, delete on Media.Movie to RTesting
 go
 
 create trigger Media.Movie_Insert

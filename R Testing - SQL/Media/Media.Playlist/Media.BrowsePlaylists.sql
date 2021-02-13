@@ -14,3 +14,7 @@ begin
 	from Media.Playlist
 	order by PlaylistName
 end
+go
+
+grant execute on Media.BrowsePlaylists to RTesting
+go

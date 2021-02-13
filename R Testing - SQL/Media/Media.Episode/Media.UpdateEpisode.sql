@@ -41,3 +41,7 @@ begin
 		,LastMaintenanceUser = system_user
 	where EpisodeUid = @episodeUid
 end
+go
+
+grant execute on Media.UpdateEpisode to RTesting
+go

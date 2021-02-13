@@ -13,3 +13,6 @@ begin
 	where SeriesUid = @seriesUid
 end
 go
+
+grant execute on Media.DeleteSeries to RTesting
+go

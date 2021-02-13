@@ -11,3 +11,7 @@ begin
 
 	delete from Reference.Network where NetworkId = @networkId
 end
+go
+
+grant execute on Reference.DeleteNetwork to RTesting
+go

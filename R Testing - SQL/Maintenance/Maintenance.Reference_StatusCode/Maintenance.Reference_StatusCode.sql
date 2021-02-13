@@ -9,3 +9,19 @@
 	,StatusDescription_Before nvarchar(100) null
 	,StatusDescription_After nvarchar(100) null
 )
+go
+
+alter table Maintenance.Reference_StatusCode add constraint PK_Reference_StatusCode primary key clustered (MaintenanceDateTime, StatusCodeId)
+go
+
+alter table Maintenance.Reference_StatusCode add constraint DF_Reference_StatusCode_MaintenanceDateTime default (getdate()) for MaintenanceDateTime
+go
+
+alter table Maintenance.Reference_StatusCode add constraint DF_Reference_StatusCode_MaintenanceUser default (system_user) for MaintenanceUser
+go
+
+grant select, insert on Maintenance.Reference_StatusCode to RTesting
+go
+
+deny update, delete on Maintenance.Reference_StatusCode to RTesting
+go

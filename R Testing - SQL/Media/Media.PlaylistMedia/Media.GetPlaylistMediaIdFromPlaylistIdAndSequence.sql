@@ -13,3 +13,7 @@ begin
 
 	return @playlistMediaId
 end
+go
+
+grant execute on Media.GetPlaylistMediaIdFromPlaylistIdAndSequence to RTesting
+go

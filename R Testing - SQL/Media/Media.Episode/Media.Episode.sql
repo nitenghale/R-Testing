@@ -19,7 +19,7 @@ go
 create unique clustered index IX_Episode_AddDateTime on Media.Episode (AddDateTime, EpisodeUid)
 go
 
-create unique nonclustered index IX_Episode_Series_Season_Episode on Media.Episode (SeriesUid, SeasonNumber, EpisodeNumber)
+create unique nonclustered index IX_Episode_Series_Season_Episode on Media.Episode (SeriesUid, SeasonNumber, EpisodeNumber) on IndexData
 go
 
 alter table Media.Episode add constraint FK_Episode_Series foreign key (SeriesUid) references Media.Series (SeriesUid)
@@ -35,6 +35,9 @@ alter table Media.Episode add constraint DF_Episode_LastMaintenanceDateTime defa
 go
 
 alter table Media.Episode add constraint DF_Episode_LastMaintenanceUser default (system_user) for LastMaintenanceUser
+go
+
+grant select, insert, update, delete on Media.Episode to RTesting
 go
 
 create trigger Media.Episode_Insert

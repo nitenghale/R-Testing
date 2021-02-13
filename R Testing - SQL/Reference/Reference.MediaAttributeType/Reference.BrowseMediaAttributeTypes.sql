@@ -16,3 +16,7 @@ begin
 	from Reference.MediaAttributeType
 	order by MediaAttributeType
 end
+go
+
+grant execute on Reference.BrowseMediaAttributeTypes to RTesting
+go

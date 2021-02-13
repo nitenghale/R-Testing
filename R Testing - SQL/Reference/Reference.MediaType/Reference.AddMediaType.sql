@@ -22,3 +22,7 @@ begin
 		,@mediaTypeDescription
 	)
 end
+go
+
+grant execute on Reference.AddMediaType to RTesting
+go

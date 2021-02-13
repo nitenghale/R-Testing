@@ -8,3 +8,7 @@ begin
 
 	return @activitySequence
 end
+go
+
+grant execute on Activity.GetNextActivitySequence to RTesting
+go

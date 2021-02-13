@@ -21,3 +21,7 @@ begin
 		,LastMaintenanceUser = system_user
 	where StatusCodeId = @statusCodeId
 end
+go
+
+grant execute on Reference.UpdateStatusCode to RTesting
+go

@@ -31,3 +31,9 @@ go
 
 alter table Maintenance.Media_Episode add constraint DF_Media_Episode_MaintenanceUser default (system_user) for MaintenanceUser
 go
+
+grant select, insert on Maintenance.Media_Episode to RTesting
+go
+
+deny update, delete on Maintenance.Media_Episode to RTesting
+go

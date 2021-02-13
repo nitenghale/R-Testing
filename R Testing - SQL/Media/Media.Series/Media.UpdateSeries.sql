@@ -35,3 +35,7 @@ begin
 		,LastMaintenanceUser = system_user
 	where SeriesUid = @seriesUid
 end
+go
+
+grant execute on Media.UpdateSeries to RTesting
+go

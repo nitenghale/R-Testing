@@ -12,3 +12,7 @@ begin
 		SeriesTitle
 		,SeriesYear
 end
+go
+
+grant execute on Media.ListSeries to RTesting
+go

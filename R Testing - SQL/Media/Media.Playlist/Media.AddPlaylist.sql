@@ -18,3 +18,7 @@ begin
 		@playlistName
 	)
 end
+go
+
+grant execute on Media.AddPlaylist to RTesting
+go

@@ -26,3 +26,7 @@ begin
 		,@mediaAttributeRepeatable
 	)
 end
+go
+
+grant execute on Reference.AddMediaAttributeType to RTesting
+go

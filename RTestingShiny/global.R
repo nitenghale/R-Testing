@@ -3,7 +3,6 @@ source("ReferenceNetworkModule.R")
 source("ReferenceStatusCodeModule.R")
 source("MediaMovieModule.R")
 source("MediaSeriesModule.R")
-source("MediaEpisodeModule.R")
 source("MediaPlaylistModule.R")
 source("MediaRecordingModule.R")
 

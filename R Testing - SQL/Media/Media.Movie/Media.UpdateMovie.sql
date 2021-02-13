@@ -32,3 +32,7 @@ begin
 		,LastMaintenanceUser = system_user
 	where MovieUid = @movieUid
 end
+go
+
+grant execute on Media.UpdateMovie to RTesting
+go

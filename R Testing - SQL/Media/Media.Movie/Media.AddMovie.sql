@@ -43,3 +43,6 @@ begin
 	)
 end
 go
+
+grant execute on Media.AddMovie to RTesting
+go

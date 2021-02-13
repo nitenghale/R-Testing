@@ -43,3 +43,6 @@ begin
 	)
 end
 go
+
+grant execute on Media.AddSeries to RTesting
+go
