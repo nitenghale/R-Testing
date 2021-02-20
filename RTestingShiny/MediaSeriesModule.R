@@ -9,52 +9,24 @@ mediaSeriesModuleUI <- function(id, label = "Series Module") {
   library(stringr)
 
   tagList(
-    tabsetPanel(
-      tabPanel("Series",
-        fluidPage(
-          fluidRow(
-            column(3, uiOutput(ns("outMediaSeriesTitle"))),
-            column(2, uiOutput(ns("outMediaSeriesYear"))),
-            column(2, uiOutput(ns("outMediaSeriesNetwork"))),
-            column(4, uiOutput(ns("outMediaSeriesDescription")))
-          ),
-          fluidRow(
-            column(2, uiOutput(ns("outMediaSeriesActionButton")))
-          ),
-          fluidRow(
-            column(12, textOutput(ns("outMediaSeriesMessage")))
-          ),
-          br(),
-          DT::dataTableOutput(ns("outMediaSeriesBrowse")),
-          br(),
-          fluidRow(
-            column(12, actionButton(ns("mediaSeriesResetButton"), "Reset"))
-          )
-        )
+    fluidPage(
+      fluidRow(
+        column(3, uiOutput(ns("outMediaSeriesTitle"))),
+        column(2, uiOutput(ns("outMediaSeriesYear"))),
+        column(2, uiOutput(ns("outMediaSeriesNetwork"))),
+        column(4, uiOutput(ns("outMediaSeriesDescription")))
       ),
-      tabPanel("Episodes",
-        fluidPage(
-          fluidRow(
-            column(2, uiOutput(ns("outMediaEpisodeSeries"))),
-            column(1, uiOutput(ns("outMediaEpisodeSeasonNumber"))),
-            column(1, uiOutput(ns("outMediaEpisodeEpisodeNumber"))),
-            column(3, uiOutput(ns("outMediaEpisodeTitle"))),
-            column(2, uiOutput(ns("outMediaEpisodeAirDate"))),
-            column(3, uiOutput(ns("outMediaEpisodeSynopsis")))
-          ),
-          fluidRow(
-            column(2, uiOutput(ns("outMediaEpisodeActionButton")))
-          ),
-          fluidRow(
-            column(12, textOutput(ns("outMediaEpisodeMessage")))
-          ),
-          br(),
-          DT::dataTableOutput(ns("outMediaEpisodeBrowse")),
-          br(),
-          fluidRow(
-            column(12, actionButton(ns("mediaEpisodeResetButton"), "Reset"))
-          )
-        )
+      fluidRow(
+        column(2, uiOutput(ns("outMediaSeriesActionButton")))
+      ),
+      fluidRow(
+        column(12, textOutput(ns("outMediaSeriesMessage")))
+      ),
+      br(),
+      DT::dataTableOutput(ns("outMediaSeriesBrowse")),
+      br(),
+      fluidRow(
+        column(12, actionButton(ns("mediaSeriesResetButton"), "Reset"))
       )
     )
   )
@@ -91,7 +63,7 @@ mediaSeriesModuleServer <- function(id, stringsAsFactors) {
         renderUI(CreateMediaSeriesActionButton(ns, "Add"))
 
       #####
-      values <- reactiveValues(seriesData = NULL, episodeData = NULL)
+      values <- reactiveValues(seriesData = NULL)
 
       values$seriesData <- GetSeriesData()
 
@@ -113,6 +85,15 @@ mediaSeriesModuleServer <- function(id, stringsAsFactors) {
 
         if (substring(message, 1, 13) == "Series Added:")
         {
+          seriesTitle <- input$mediaSeriesTitle
+          seriesYear <- as.numeric(input$mediaSeriesYear)
+
+          values$seriesData <- GetSeriesData()
+
+          seriesUid <- values$seriesData$SeriesUid[
+            values$seriesData$SeriesTitle == seriesTitle &
+            values$seriesData$SeriesYear == seriesYear]
+
           output$outMediaSeriesTitle <-
             renderUI(CreateMediaSeriesTitleTextbox(ns))
 
@@ -124,8 +105,6 @@ mediaSeriesModuleServer <- function(id, stringsAsFactors) {
 
           output$outMediaSeriesDescription <-
             renderUI(CreateMediaSeriesDescriptionTextbox(ns))
-
-          values$seriesData <- GetSeriesData()
 
           output$outMediaSeriesBrowse <-
             DT::renderDataTable(GetSeries(values$seriesData))
@@ -205,7 +184,7 @@ mediaSeriesModuleServer <- function(id, stringsAsFactors) {
         }
       })
 
-      ## Refresh button clicked
+      ## Seriess Refresh button clicked
       observeEvent(input$mediaSeriesResetButton, {
         output$outMediaSeriesTitle <-
           renderUI(CreateMediaSeriesTitleTextbox(ns))
@@ -229,95 +208,6 @@ mediaSeriesModuleServer <- function(id, stringsAsFactors) {
 
         output$outMediaSeriesBrowse <-
           DT::renderDataTable(GetSeries(values$seriesData))
-      })
-
-################################################################################################
-################################################################################################
-########## Episode "Module"
-
-      output$outMediaEpisodeSeries <-
-        renderUI(CreateMediaEpisodeSeriesDropDown(ns))
-
-      output$outMediaEpisodeSeasonNumber <-
-        renderUI(CreateMediaEpisodeSeasonNumberTextbox(ns))
-
-      output$outMediaEpisodeEpisodeNumber <-
-        renderUI(CreateMediaEpisodeEpisodeNumberTextbox(ns))
-
-      output$outMediaEpisodeTitle <-
-        renderUI(CreateMediaEpisodeTitleTextbox(ns))
-
-      output$outMediaEpisodeAirDate <-
-        renderUI(CreateMediaEpisodeAirDatePicker(
-          ns, minDate, maxDate))
-
-      output$outMediaEpisodeSynopsis <-
-        renderUI(CreateMediaEpisodeSynopsisTextbox(ns))
-
-      output$outMediaEpisodeBrowse <-
-        DT::renderDataTable(GetEpisodes(input$mediaEpisodeSeries))
-
-      ## Episode Add button clicked
-      observeEvent(input$mediaEpisodeAdd, {
-
-        message <- AddEpisode(input$mediaEpisodeSeries,
-                              input$mediaEpisodeSeasonNumber,
-                              input$mediaEpisodeEpisodeNumber,
-                              input$mediaEpisodeTitle,
-                              input$mediaEpisodeAirDate,
-                              input$mediaEpisodeSynopsis)
-
-        output$outMediaEpisodeMessage <- renderText(message)
-
-        if (substring(message, 1, 14) == "Episode Added:")
-        {
-          output$outMediaEpisodeSeries <-
-            renderUI(CreateMediaEpisodeSeriesDropDown(ns, input$mediaEpisodeSeries))
-
-          output$outMediaEpisodeSeasonNumber <-
-            renderUI(CreateMediaEpisodeSeasonNumberTextbox(ns))
-
-          output$outMediaEpisodeEpisodeNumber <-
-            renderUI(CreateMediaEpisodeEpisodeNumberTextbox(ns))
-
-          output$outMediaEpisodeTitle <-
-            renderUI(CreateMediaEpisodeTitleTextbox(ns))
-
-          output$outMediaEpisodeAirDate <-
-            renderUI(CreateMediaEpisodeAirDatePicker(
-              ns, minDate, maxDate))
-
-          output$outMediaEpisodeSynopsis <-
-            renderUI(CreateMediaEpisodeSynopsisTextbox(ns))
-
-          output$outMediaEpisodeBrowse <-
-            DT::renderDataTable(GetEpisodes(input$mediaEpisodeSeries))
-        }
-      })
-
-      ## Episode Refresh button clicked
-      observeEvent(input$mediaEpisodeRefresh, {
-        output$outMediaEpisodeSeries <-
-          renderUI(CreateMediaEpisodeSeriesDropDown(ns))
-
-        output$outMediaEpisodeSeasonNumber <-
-          renderUI(CreateMediaEpisodeSeasonNumberTextbox(ns))
-
-        output$outMediaEpisodeEpisodeNumber <-
-          renderUI(CreateMediaEpisodeEpisodeNumberTextbox(ns))
-
-        output$outMediaEpisodeTitle <-
-          renderUI(CreateMediaEpisodeTitleTextbox(ns))
-
-        output$outMediaEpisodeAirDate <-
-          renderUI(CreateMediaEpisodeAirDatePicker(
-            ns, minDate, maxDate))
-
-        output$outMediaEpisodeSynopsis <-
-          renderUI(CreateMediaEpisodeSynopsisTextbox(ns))
-
-        output$outMediaEpisodeBrowse <-
-          DT::renderDataTable(GetEpisodes(input$mediaEpisodeSeries))
       })
     }
   )

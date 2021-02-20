@@ -20,6 +20,7 @@ begin
 		EpisodeUid
 		--,Series.SeriesTitle
 		--,Series.SeriesYear
+		,SeriesUid
 		,SeasonNumber
 		,EpisodeNumber
 		,EpisodeTitle

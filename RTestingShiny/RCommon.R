@@ -7,7 +7,7 @@ GetDatabaseConnection <- function() {
   database <- "RTesting"
   uid <- "RTesting"
   pwd <- "SomePassword"
-  
+
   return(
     dbConnect(
       odbc::odbc(),
@@ -32,4 +32,8 @@ ReturnErrorDataTable <- function(error) {
       )
     )
   )
+}
+
+ReturnErrorDataFrame <- function(error) {
+  return(as.data.frame(as.character(error)))
 }

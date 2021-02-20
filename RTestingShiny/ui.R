@@ -20,6 +20,7 @@ shinyUI(
         menuItem("Media", tabName = "mediaMenu",
           menuSubItem("Movie", tabName = "mediaMovieMenu"),
           menuSubItem("Series", tabName = "mediaSeriesMenu"),
+          menuSubItem("Episode", tabName = "mediaEpisodeMenu"),
           menuSubItem("Playlist", tabName = "mediaPlaylistMenu"),
           menuSubItem("Recordings", tabName = "mediaRecordingsMenu"))
       )
@@ -35,7 +36,9 @@ shinyUI(
         tabItem(tabName = "mediaMovieMenu",
           mediaMovieModuleUI("mediaMovieModule", "Movie Module")),
         tabItem(tabName = "mediaSeriesMenu",
-          mediaSeriesModuleUI("mediaSeriesModule", "Series Module"))
+          mediaSeriesModuleUI("mediaSeriesModule", "Series Module")),
+        tabItem(tabName = "mediaEpisodeMenu",
+                mediaEpisodeModuleUI("mediaEpisodeModule", "Episode Module"))
         ##tabItem(tabName = "mediaPlaylistMenu",
           ##playlistModuleUI("playlistModule", "Playlist Module")),
         ##tabItem(tabName = "mediaRecordingsMenu",
